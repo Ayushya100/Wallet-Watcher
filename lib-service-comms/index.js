@@ -1,5 +1,6 @@
 'use strict';
 
+import { responseCodes, responseMessage } from './src/assets/response/response-codes.js';
 import {
     userModel,
     cardInfoModel,
@@ -19,6 +20,8 @@ import {
 } from './src/models/index.js';
 
 export {
+    responseCodes,
+    responseMessage,
     userModel,
     cardInfoModel,
     investmentAccInfoModel,
