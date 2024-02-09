@@ -1,6 +1,7 @@
 'use strict';
 
 import { responseCodes, responseMessage } from './src/assets/response/response-codes.js';
+import { errorHandler, verifyToken } from './src/middlewares/index.js';
 import {
     userModel,
     cardInfoModel,
@@ -23,6 +24,8 @@ import { ApiError, ApiResponse } from './src/utils/index.js';
 export {
     responseCodes,
     responseMessage,
+    errorHandler,
+    verifyToken,
     userModel,
     cardInfoModel,
     investmentAccInfoModel,
