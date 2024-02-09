@@ -3,7 +3,7 @@
 class ApiError extends Error {
     constructor(
         statusCode,
-        message = 'An error occurred while processing your request',
+        message = 'An error occurred while processing your request.',
         type = 'INTERNAL_SERVER_ERROR',
         errors = [],
         stack = '',
