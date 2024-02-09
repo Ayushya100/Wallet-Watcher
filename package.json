@@ -1,0 +1,63 @@
+{
+  "name": "wallet-watcher",
+  "version": "1.0.0",
+  "description": "Welcome to the GitHub repository for **Wallet Watcher** - a burgeoning financial tracking and management tool designed with personal use in mind. Currently under active development, Wallet Watcher aims to offer a powerful yet user-friendly platform to help users effortlessly manage and analyze their financial activities.\r ## Project Status: Under Development\r ### What's Happening Now:\r - **Core Feature Implementation:** Our team is working to develop the server-side requirements of Wallet Watcher.\r - **Testing & Refinement:** Concurrently, we are testing the functionalities for reliability and user-friendliness.\r ## Focused Key Features\r ### Easy Tracking of Income and Expenses\r - **Simplified Data Entry:** Quickly add income and expenses with an intutive interface.\r - **Categorization:** Organize your financial data into categories for better analysis and tracking.\r ### Financial Reporting\r - **Detailed Reports:** Generate comprehensive reports to view your financial trends and patterns.\r - **Export Options:** Easily export your financial data in various formats for offline analysis or sharing.\r ### Secure Data Management\r - **Privacy First:** We value your privacy. Your data is never shared or sold to third parties.\r ### Cross-platform Accessibility\r - **Web and Mobile Access:** Use Wallet Watcher on your preferred devices, with seamless synchronization between platforms.\r ### User-Friendly Dashboard\r - **Intutive Interface:** A clean and strightforward dashboard that gives you a quick overview of your financial status.\r - **Customizable Views:** Tailor the dashboard to display the information most relevant to you.\r ## Getting Started\r To start using Wallet Watcher, please clone or download the application. Follow the installation and setup instruction in our ReadME file to get up and running.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm:start-*\"",
+    "start-accountManagementServices": "cd services/accountManagementServices && npm run start",
+    "start-financeManagementServices": "cd services/financeManagementServices && npm run start",
+    "start-reportManagementServices": "cd services/reportManagementServices && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayushya100/Wallet-Watcher.git"
+  },
+  "keywords": [
+    "javascript",
+    "angular",
+    "typescript",
+    "node",
+    "express",
+    "mongodb"
+  ],
+  "author": "Ayushya Jaiswal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ayushya100/Wallet-Watcher/issues"
+  },
+  "homepage": "https://github.com/Ayushya100/Wallet-Watcher#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "ansi-regex": "^6.0.1",
+    "ansi-styles": "^6.2.1",
+    "chalk": "^5.3.0",
+    "cliui": "^8.0.1",
+    "color-convert": "^2.0.1",
+    "color-name": "^2.0.0",
+    "date-fns": "^3.3.1",
+    "emoji-regex": "^10.3.0",
+    "escalade": "^3.1.2",
+    "get-caller-file": "^2.0.5",
+    "has-flag": "^5.0.1",
+    "is-fullwidth-code-point": "^5.0.0",
+    "lodash": "^4.17.21",
+    "regenerator-runtime": "^0.14.1",
+    "require-directory": "^2.1.1",
+    "rxjs": "^7.8.1",
+    "shell-quote": "^1.8.1",
+    "spawn-command": "^0.0.2",
+    "string-width": "^7.1.0",
+    "strip-ansi": "^7.1.0",
+    "supports-color": "^9.4.0",
+    "tree-kill": "^1.2.2",
+    "tslib": "^2.6.2",
+    "wrap-ansi": "^9.0.0",
+    "y18n": "^5.0.8",
+    "yargs": "^17.7.2",
+    "yargs-parser": "^21.1.1"
+  }
+}
