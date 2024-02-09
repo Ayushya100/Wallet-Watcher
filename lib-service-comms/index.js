@@ -18,6 +18,7 @@ import {
     metadataModel,
     logsModel
 } from './src/models/index.js';
+import { ApiError, ApiResponse } from './src/utils/index.js';
 
 export {
     responseCodes,
@@ -36,5 +37,7 @@ export {
     InvCategoryModel,
     InvDetailsModel,
     metadataModel,
-    logsModel
+    logsModel,
+    ApiError,
+    ApiResponse
 }
