@@ -6,4 +6,4 @@ import ApiResponse from './ApiResponse.js';
 export {
     ApiError,
     ApiResponse
-}
+};
