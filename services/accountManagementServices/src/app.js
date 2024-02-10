@@ -6,6 +6,10 @@ import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
 import { errorHandler } from 'lib-service-comms';
 
+// User Routes
+import { USERS_API } from './constants.js';
+import userRoutes from './routes/user-routes/index.js';
+
 const app = express();
 
 // Setting up Middlewares
@@ -31,6 +35,9 @@ app.use(rateLimit({
 app.use(express.static('public'));
 
 app.use(cookieParser());
+
+// Routes
+app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 
 // Error Handler middleware
 app.use(errorHandler);
