@@ -25,7 +25,7 @@ const createUser = async(req, res, next) => {
                         new ApiResponse(
                             responseCodes[isUserCreated.resType],
                             isUserCreated.data,
-                            responseMessage[isUserCreated.resType] + ' - ' + isUserCreated.resMsg
+                            isUserCreated.resMsg + ' - ' + responseMessage[isUserCreated.resType]
                         )
                     );
                 } else {
