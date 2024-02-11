@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Verified - Welcome to Wallet watcher</title>
+
+    <style>
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .message-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        .info {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-span {
+            font-weight: normal;
+        }
+        .from-reg {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 2px;
+        }
+        .from {
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+    <div class="username">Dear {{ fullName }},</div>
+    <div class="message">Congratulations! Your account has been successfully verified and is now active. Welcome to Wallet watcher - your gateway to financial empowerment.</div>
+    <div class="message">We're thrilled to have you as a member of our community. As a verified user, you can now access all the amazing features and benefits that Wallet watcher offers. Here are some of your basic details for your reference:</div>
+    
+    <div class="info">First Name: <span class="info-span">{{ firstName }}</span></div>
+    <div class="info">Last Name: <span class="info-span">{{ lastName }}</span></div>
+    <div class="info">userName: <span class="info-span">{{ userName }}</span></div>
+    <div class="info">Contact Number: <span class="info-span">{{ contactNumber }}</span></div>
+    <div class="info">Email Id: <span class="info-span">{{ emailId }}</span></div>
+
+    <div class="message">With your account now verified, you can start making the most of our platform right away. Whether you want to track your daily expenses, track investment, register income, or work toward your financial goals, we've got you covered.</div>
+    <div class="message">Need assistance or have questions? Don't hesitate to reach out to us at {{ custContactEmailId }}.</div>
+    <div class="message">Thank you for trusting Wallet watcher as your financial partner. We look forward to supporting you on your financial journey.</div>
+
+    <div class="from-reg">Best regards,</div>
+    <div class="from">Team Wallet watcher</div>
+</body>
+</html>
