@@ -38,6 +38,7 @@ app.use(cookieParser());
 
 // Routes
 app.post(`${USERS_API}/create-user`, userRoutes.createUser);
+app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
 
 // Error Handler middleware
 app.use(errorHandler);

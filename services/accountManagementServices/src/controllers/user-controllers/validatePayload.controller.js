@@ -21,7 +21,7 @@ const validateRegisterUserPayload = (payload) => {
         resMsg: 'VALIDATION SUCCESSFULL',
         isValid: true,
         data: payload
-    }
+    };
 
     const mandatoryFilds = ['firstName', 'userName', 'emailId', 'password'];
 
@@ -59,6 +59,23 @@ const validateRegisterUserPayload = (payload) => {
     return response;
 }
 
+const validateUserVerificationPayload = (time, verificationCode) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!time || !verificationCode) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required parameter is missing';
+        response.isValid = false;
+    }
+
+    return response;
+}
+
 export {
-    validateRegisterUserPayload
+    validateRegisterUserPayload,
+    validateUserVerificationPayload
 };
