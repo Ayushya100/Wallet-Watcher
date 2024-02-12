@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import { errorHandler } from 'lib-service-comms';
+import { errorHandler, verifyToken } from 'lib-service-comms';
 
 // User Routes
 import { USERS_API } from './constants.js';
@@ -36,10 +36,13 @@ app.use(express.static('public'));
 
 app.use(cookieParser());
 
+const tokenKey = process.env.ACCESS_TOKEN_KEY;
+
 // User Account Routes
 app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
 app.post(`${USERS_API}/user-login`, userRoutes.loginUser);
+app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getUserInfo);
 
 // Error Handler middleware
 app.use(errorHandler);
