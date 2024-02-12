@@ -36,9 +36,10 @@ app.use(express.static('public'));
 
 app.use(cookieParser());
 
-// Routes
+// User Account Routes
 app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
+app.post(`${USERS_API}/user-login`, userRoutes.loginUser);
 
 // Error Handler middleware
 app.use(errorHandler);

@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 import {v4 as uuidv4} from 'uuid';
+import jwt from 'jsonwebtoken';
 
 // Add DB Models
 import { userModel, UserFinanceModel, UserDashboardModel } from 'lib-service-comms';
@@ -85,9 +86,90 @@ const validateUser = async(userId) => {
     return updatedUserInfo;
 }
 
+const verifyPassword = async(user, password) => {
+    const isPasswordValid = await user.isPasswordCorrect(password);
+    return isPasswordValid;
+}
+
+const reactivateUser = async(userId) => {
+    const updatedUser = await User.findByIdAndUpdate(
+        { _id: userId },
+        {
+            $set: {
+                isDeleted: false,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -loginCount -isDeleted -createdBy -modifiedBy'
+    );
+
+    return updatedUser;
+}
+
+const generateAccessAndRefreshTokens = async(userId) => {
+    const user = await User.findById({ _id: userId });
+
+    const accessToken = jwt.sign(
+        {
+            _id: user._id,
+            userName: user.userName,
+            isVerified: user.isVerified,
+            isDeleted: user.isDeleted
+        },
+        process.env.ACCESS_TOKEN_KEY,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    );
+
+    const refreshToken = jwt.sign(
+        {
+            _id: user._id
+        },
+        process.env.REFRESH_TOKEN_KEY,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    );
+
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        { _id: user._id },
+        {
+            $set: {
+                refreshToken: refreshToken,
+                loginCount: user.loginCount + 1,
+                lastLogin: Date.now(),
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -createdOn -createdBy -modifiedOn -modifiedBy'
+    );
+
+    return {
+        accessToken,
+        refreshToken,
+        userId: updatedUserInfo._id,
+        userName: updatedUserInfo.userName
+    };
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
     createNewUser,
-    validateUser
+    validateUser,
+    verifyPassword,
+    generateVerificationCode,
+    reactivateUser,
+    generateAccessAndRefreshTokens
 };

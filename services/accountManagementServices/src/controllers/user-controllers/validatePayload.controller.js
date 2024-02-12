@@ -59,6 +59,7 @@ const validateRegisterUserPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameters check for verifying new user
 const validateUserVerificationPayload = (time, verificationCode) => {
     let response = {
         resType: 'SUCCESS',
@@ -75,7 +76,25 @@ const validateUserVerificationPayload = (time, verificationCode) => {
     return response;
 }
 
+// Mandatory parameters check for registering new user
+const validateUserLoginPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userNameOrEmail || !payload.password) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required parameter is missing';
+        response.isValid = false;
+    }
+
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
-    validateUserVerificationPayload
+    validateUserVerificationPayload,
+    validateUserLoginPayload
 };
