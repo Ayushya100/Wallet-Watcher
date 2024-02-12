@@ -9,15 +9,19 @@ const loginUser = async(req, res, next) => {
     try {
         const payload = req.body;
 
+        // Validate Payload
         const isValidPayload = userServices.validateUserLoginPayload(payload);
 
         if (isValidPayload.isValid) {
+            // Check if user authorized
             const isUserValid = await userServices.isUserValid(payload);
 
             if (isUserValid.isValid) {
+                // Check is user verified
                 const isUserVerified = await userServices.isUserVerified(isUserValid.data);
 
                 if (isUserVerified.isValid) {
+                    // Check if user active or not - reactivate if required
                     await userServices.isUserActive(isUserValid.data);
                     const loggedInUser = await userServices.generateAccessAndRefreshTokens(isUserValid.data._id);
 
