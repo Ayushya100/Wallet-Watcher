@@ -4,12 +4,20 @@ import {
   isUserByUserNameOrEmailAvailable,
   isUserByIdAvailable,
   createNewUser,
-  validateUser
-} from "./users.db.js";
+  validateUser,
+  verifyPassword,
+  generateVerificationCode,
+  reactivateUser,
+  generateAccessAndRefreshTokens
+} from './users.db.js';
 
 export default {
   isUserByUserNameOrEmailAvailable,
   isUserByIdAvailable,
   createNewUser,
-  validateUser
+  validateUser,
+  verifyPassword,
+  generateVerificationCode,
+  reactivateUser,
+  generateAccessAndRefreshTokens
 };
