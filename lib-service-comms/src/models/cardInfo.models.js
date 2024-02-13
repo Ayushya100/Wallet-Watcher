@@ -36,6 +36,10 @@ const cardInfoModel = (mongoose) => {
                 required: false,
                 default: '#ffffff'
             },
+            balance: {
+                type: Number,
+                default: 0
+            },
             isActive: {
                 type: Boolean,
                 required: true,
