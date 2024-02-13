@@ -53,6 +53,6 @@ const registerCard = async(req, res, next) => {
             isValid: false
         });
     }
-}
+};
 
 export default registerCard;

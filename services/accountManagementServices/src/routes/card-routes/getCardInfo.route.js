@@ -48,6 +48,6 @@ const getCardInfo = async(req, res, next) => {
             isValid: false
         };
     }
-}
+};
 
 export default getCardInfo;

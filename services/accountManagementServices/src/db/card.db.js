@@ -22,7 +22,8 @@ const createNewCard = async(userId, payload) => {
         bankInfo: payload.bankInfo,
         expirationDate: payload.expirationDate,
         holderName: payload.holderName,
-        cardColor: payload.cardColor
+        cardColor: payload.cardColor,
+        balance: payload.balance || 0
     });
     return newCard;
 }
@@ -30,7 +31,8 @@ const createNewCard = async(userId, payload) => {
 const getAllCardInfo = async(userId) => {
     const cardInfo = await Card.find(
         {
-            userId: userId
+            userId: userId,
+            isDeleted: false
         }
     ).select(
         'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
@@ -42,10 +44,11 @@ const getCardInfoById = async(userId, cardId) => {
     const cardInfo = await Card.findOne(
         {
             _id: cardId,
-            userId: userId
+            userId: userId,
+            isDeleted: false
         }
     ).select(
-        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive balance'
     );
     return cardInfo;
 }
