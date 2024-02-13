@@ -36,6 +36,11 @@ const cardInfoModel = (mongoose) => {
                 required: false,
                 default: '#ffffff'
             },
+            isActive: {
+                type: Boolean,
+                required: true,
+                default: true
+            },
             createdOn: {
                 type: Date,
                 required: true,

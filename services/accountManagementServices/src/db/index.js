@@ -10,6 +10,10 @@ import {
   reactivateUser,
   generateAccessAndRefreshTokens
 } from './users.db.js';
+import {
+  isCardByCardNumberAvailable,
+  createNewCard
+} from './card.db.js';
 
 export default {
   isUserByUserNameOrEmailAvailable,
@@ -19,5 +23,7 @@ export default {
   verifyPassword,
   generateVerificationCode,
   reactivateUser,
-  generateAccessAndRefreshTokens
+  generateAccessAndRefreshTokens,
+  isCardByCardNumberAvailable,
+  createNewCard
 };

@@ -9,6 +9,7 @@ import { errorHandler, verifyToken } from 'lib-service-comms';
 // User Routes
 import { USERS_API } from './constants.js';
 import userRoutes from './routes/user-routes/index.js';
+import cardRoutes from './routes/card-routes/index.js';
 
 const app = express();
 
@@ -43,6 +44,9 @@ app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
 app.post(`${USERS_API}/user-login`, userRoutes.loginUser);
 app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getUserInfo);
+
+// User Card Routes
+app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
 
 // Error Handler middleware
 app.use(errorHandler);
