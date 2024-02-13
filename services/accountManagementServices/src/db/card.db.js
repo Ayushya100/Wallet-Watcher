@@ -27,7 +27,32 @@ const createNewCard = async(userId, payload) => {
     return newCard;
 }
 
+const getAllCardInfo = async(userId) => {
+    const cardInfo = await Card.find(
+        {
+            userId: userId
+        }
+    ).select(
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+    );
+    return cardInfo;
+}
+
+const getCardInfoById = async(userId, cardId) => {
+    const cardInfo = await Card.findOne(
+        {
+            _id: cardId,
+            userId: userId
+        }
+    ).select(
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+    );
+    return cardInfo;
+}
+
 export {
     isCardByCardNumberAvailable,
-    createNewCard
+    createNewCard,
+    getAllCardInfo,
+    getCardInfoById
 };
