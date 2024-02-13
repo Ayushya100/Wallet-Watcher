@@ -47,6 +47,8 @@ app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getU
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
+app.get(`${USERS_API}/:userId/get-card-info`, verifyToken(tokenKey), cardRoutes.getCardInfo);
+app.get(`${USERS_API}/:userId/get-card-info/:id`, verifyToken(tokenKey), cardRoutes.getCardInfo);
 
 // Error Handler middleware
 app.use(errorHandler);

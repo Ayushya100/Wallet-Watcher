@@ -12,7 +12,9 @@ import {
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
-  createNewCard
+  createNewCard,
+  getAllCardInfo,
+  getCardInfoById
 } from './card.db.js';
 
 export default {
@@ -25,5 +27,7 @@ export default {
   reactivateUser,
   generateAccessAndRefreshTokens,
   isCardByCardNumberAvailable,
-  createNewCard
+  createNewCard,
+  getAllCardInfo,
+  getCardInfoById
 };

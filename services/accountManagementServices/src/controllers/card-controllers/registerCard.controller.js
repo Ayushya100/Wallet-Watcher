@@ -22,6 +22,7 @@ const checkCardByCardNumber = async(cardNumber) => {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
             isValid: false
         };
     }
@@ -50,6 +51,7 @@ const registerNewCard = async(userId, payload) => {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
             isValid: false
         };
     }
