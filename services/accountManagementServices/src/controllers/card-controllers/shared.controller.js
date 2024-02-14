@@ -10,6 +10,7 @@ const isCardByIdExist = async(userId, cardId) => {
             return {
                 resType: 'SUCCESS',
                 resMsg: 'VALIDATION SUCCESSFULL',
+                data: isCardAvailable,
                 isValid: true
             };
         }
