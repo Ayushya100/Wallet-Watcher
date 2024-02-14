@@ -11,7 +11,7 @@ const deactivateCard = async(userId, cardId) => {
             resMsg: 'Card Deactivated Successfully',
             data: updatedCardInfo,
             isValid: true
-        }
+        };
     } catch (err) {
         return {
             resType: 'INTERNAL_SERVER_ERROR',

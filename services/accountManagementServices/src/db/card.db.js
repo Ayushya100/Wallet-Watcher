@@ -101,11 +101,34 @@ const deactivateCard = async(userId, cardId) => {
     return updatedCardInfo;
 }
 
+const reactivateCard = async(userId, cardId) => {
+    const updateCardInfo = await Card.findByIdAndUpdate(
+        {
+            _id: cardId,
+            userId: userId
+        },
+        {
+            $set: {
+                isActive: true,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+    );
+    return updateCardInfo;
+}
+
 export {
     isCardByCardNumberAvailable,
     createNewCard,
     getAllCardInfo,
     getCardInfoById,
     updateExistingCard,
-    deactivateCard
+    deactivateCard,
+    reactivateCard
 };

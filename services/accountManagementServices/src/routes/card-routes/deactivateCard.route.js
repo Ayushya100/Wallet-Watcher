@@ -1,6 +1,6 @@
 'use strict';
 
-import { ApiResponse, responseCodes, responseMessage } from "lib-service-comms";
+import { ApiResponse, responseCodes, responseMessage } from 'lib-service-comms';
 import cardServices from '../../controllers/card-controllers/index.js';
 
 // API Function
@@ -30,12 +30,12 @@ const deactivateCard = async(req, res, next) => {
             return next(isCardAvailable);
         }
     } catch (err) {
-        return {
+        next({
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: err,
             stack: err.stack,
             isValid: false
-        };
+        });
     }
 }
 
