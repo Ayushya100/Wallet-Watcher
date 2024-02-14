@@ -3,6 +3,7 @@
 import { ApiResponse, responseCodes, responseMessage } from 'lib-service-comms';
 import cardServices from '../../controllers/card-controllers/index.js';
 
+// API Function
 const getCardInfo = async(req, res, next) => {
     try {
         const userId = req.params.userId;
