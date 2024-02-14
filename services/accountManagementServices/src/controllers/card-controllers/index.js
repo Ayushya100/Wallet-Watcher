@@ -1,6 +1,6 @@
 'use strict';
 
-import { validateRegisterCardPayload } from './validatePayload.controller.js';
+import { validateRegisterCardPayload, validateUpdateCardPayload } from './validatePayload.controller.js';
 import { checkCardByCardNumber, registerNewCard } from './registerCard.controller.js';
 import { getAllCardsInfo, getCardByIdInfo } from './getCardInfo.controller.js';
 import { isCardByIdExist, updateCardinfo } from './updateCardInfo.controller.js';
@@ -12,5 +12,6 @@ export default {
     getAllCardsInfo,
     getCardByIdInfo,
     isCardByIdExist,
+    validateUpdateCardPayload,
     updateCardinfo
 };
