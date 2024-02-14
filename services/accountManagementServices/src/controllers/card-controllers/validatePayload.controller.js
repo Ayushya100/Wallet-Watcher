@@ -6,6 +6,12 @@ const validateCardNumber = (cardNumber) => {
     return validators.cardNumber.test(cardNumber);
 }
 
+const validateExpiryDate = (expiryDate) => {
+    const expirationDate = new Date(expiryDate);
+    const currentDate = new Date();
+    return expirationDate > currentDate;
+}
+
 // Mandatory parameters check for registering new card
 const validateRegisterCardPayload = (payload) => {
     let response = {
@@ -34,9 +40,33 @@ const validateRegisterCardPayload = (payload) => {
         response.resMsg = 'Pattern Invalid. Card number incorrect';
         response.isValid = false;
     }
+
+    if (!validateExpiryDate(payload.expirationDate)) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Expiration Date must be greater than today's date`;
+        response.isValid = false;
+    }
+    return response;
+}
+
+const validateUpdateCardPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (payload.expirationDate) {
+        if (!validateExpiryDate(payload.expirationDate)) {
+            response.resType = 'BAD_REQUEST';
+        response.resMsg = `Expiration Date must be greater than today's date`;
+        response.isValid = false;
+        }
+    }
     return response;
 }
 
 export {
-    validateRegisterCardPayload
+    validateRegisterCardPayload,
+    validateUpdateCardPayload
 };
