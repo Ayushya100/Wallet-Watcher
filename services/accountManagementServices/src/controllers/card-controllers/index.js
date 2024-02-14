@@ -3,7 +3,9 @@
 import { validateRegisterCardPayload, validateUpdateCardPayload } from './validatePayload.controller.js';
 import { checkCardByCardNumber, registerNewCard } from './registerCard.controller.js';
 import { getAllCardsInfo, getCardByIdInfo } from './getCardInfo.controller.js';
-import { isCardByIdExist, updateCardinfo } from './updateCardInfo.controller.js';
+import { updateCardinfo } from './updateCardInfo.controller.js';
+import { isCardByIdExist } from './shared.controller.js';
+import { deactivateCard } from './deactivateCard.route.js';
 
 export default {
     validateRegisterCardPayload,
@@ -13,5 +15,6 @@ export default {
     getCardByIdInfo,
     isCardByIdExist,
     validateUpdateCardPayload,
-    updateCardinfo
+    updateCardinfo,
+    deactivateCard
 };

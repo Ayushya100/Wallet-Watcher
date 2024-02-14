@@ -2,15 +2,16 @@
 
 import dbConnect from '../../db/index.js';
 
-const updateCardinfo = async(userId, cardId, payload) => {
+const deactivateCard = async(userId, cardId) => {
     try {
-        const updatedCardInfo = await dbConnect.updateExistingCard(userId, cardId, payload);
+        const updatedCardInfo = await dbConnect.deactivateCard(userId, cardId);
+
         return {
             resType: 'REQUEST_COMPLETED',
-            resMsg: 'Card Info Updated',
+            resMsg: 'Card Deactivated Successfully',
             data: updatedCardInfo,
             isValid: true
-        };
+        }
     } catch (err) {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
@@ -22,5 +23,5 @@ const updateCardinfo = async(userId, cardId, payload) => {
 }
 
 export {
-    updateCardinfo
+    deactivateCard
 };
