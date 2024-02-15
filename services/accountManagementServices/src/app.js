@@ -10,6 +10,7 @@ import { errorHandler, verifyToken } from 'lib-service-comms';
 import { USERS_API } from './constants.js';
 import userRoutes from './routes/user-routes/index.js';
 import cardRoutes from './routes/card-routes/index.js';
+import accountRoutes from './routes/investment-account-routes/index.js';
 
 const app = express();
 
@@ -53,6 +54,9 @@ app.put(`${USERS_API}/:userId/update-card-info/:id`, verifyToken(tokenKey), card
 app.put(`${USERS_API}/:userId/deactivate-card/:id`, verifyToken(tokenKey), cardRoutes.deactivateCard);
 app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), cardRoutes.reactivateCard);
 app.delete(`${USERS_API}/:userId/delete-card/:id`, verifyToken(tokenKey), cardRoutes.deleteCard);
+
+// Investment Account Routes
+app.post(`${USERS_API}/:userId/create-account`, verifyToken(tokenKey), accountRoutes.createAccount);
 
 // Error Handler middleware
 app.use(errorHandler);
