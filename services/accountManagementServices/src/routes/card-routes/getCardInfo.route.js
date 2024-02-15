@@ -38,9 +38,6 @@ const getCardInfo = async(req, res, next) => {
                 return next(getAllCardInfo);
             }
         }
-        res.status(200).send({
-            userId, cardId
-        });
     } catch (err) {
         next({
             resType: 'INTERNAL_SERVER_ERROR',
