@@ -8,15 +8,15 @@ const investmentAccInfoModel = (mongoose) => {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
             },
-            accName: {
+            accountName: {
                 type: String,
                 required: true
             },
-            accNumber: {
+            accountNumber: {
                 type: String,
                 required: true
             },
-            accDate: {
+            accountDate: {
                 type: Date,
                 default: Date.now(),
                 required: true
@@ -24,6 +24,11 @@ const investmentAccInfoModel = (mongoose) => {
             holderName: {
                 type: String,
                 required: true
+            },
+            amount: {
+                type: Number,
+                default: 0,
+                required: false
             },
             isActive: {
                 type: Boolean,

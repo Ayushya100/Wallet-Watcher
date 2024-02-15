@@ -49,6 +49,7 @@ const validateRegisterCardPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameters check for updating card info
 const validateUpdateCardPayload = (payload) => {
     let response = {
         resType: 'SUCCESS',
