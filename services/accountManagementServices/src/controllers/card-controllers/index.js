@@ -7,6 +7,7 @@ import { updateCardinfo } from './updateCardInfo.controller.js';
 import { isCardByIdExist } from './shared.controller.js';
 import { deactivateCard } from './deactivateCard.controller.js';
 import { isCardValidToReactivate, reactivateCard } from './reactivateCard.controller.js';
+import { deleteCard } from './deleteCard.controller.js';
 
 export default {
     validateRegisterCardPayload,
@@ -19,5 +20,6 @@ export default {
     updateCardinfo,
     deactivateCard,
     isCardValidToReactivate,
-    reactivateCard
+    reactivateCard,
+    deleteCard
 };
