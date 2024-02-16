@@ -26,7 +26,34 @@ const createAccount = async(userId, payload) => {
     return newAccount;
 }
 
+const getAllAccountInfo = async(userId) => {
+    const accountInfo = await Account.find(
+        {
+            userId: userId,
+            isDeleted: false
+        }
+    ).select(
+        'accountName accountNumber accountDate holderName isActive'
+    );
+    return accountInfo;
+}
+
+const getAccountById = async(userId, accountId) => {
+    const accountInfo = await Account.findOne(
+        {
+            _id: accountId,
+            userId: userId,
+            isDeleted: false
+        }
+    ).select(
+        'accountName accountNumber accountDate holderName isActive balance'
+    );
+    return accountInfo;
+}
+
 export {
     isAccountByAccNumberAvailable,
-    createAccount
+    createAccount,
+    getAllAccountInfo,
+    getAccountById
 };
