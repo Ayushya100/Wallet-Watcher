@@ -31,7 +31,13 @@ const checkCardByCardNumber = async(cardNumber) => {
 // Register new card
 const registerNewCard = async(userId, payload) => {
     try {
-        payload.expirationDate = new Date(payload.expirationDate);
+        payload.cardType = payload.cardType.toUpperCase();
+
+        const [year, month] = payload.expirationDate.split('-').map(Number);
+        const lastDateOfMonth = new Date(year, month, 0);
+        lastDateOfMonth.setHours(23, 59, 59, 999);
+        payload.expirationDate = lastDateOfMonth;
+
         const newCard = await dbConnect.createNewCard(userId, payload);
 
         if (newCard) {

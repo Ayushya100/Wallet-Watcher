@@ -4,6 +4,11 @@ import dbConnect from '../../db/index.js';
 
 const updateCardinfo = async(userId, cardId, payload) => {
     try {
+        const [year, month] = payload.expirationDate.split('-').map(Number);
+        const lastDateOfMonth = new Date(year, month, 0);
+        lastDateOfMonth.setHours(23, 59, 59, 999);
+        payload.expirationDate = lastDateOfMonth;
+
         const updatedCardInfo = await dbConnect.updateExistingCard(userId, cardId, payload);
         return {
             resType: 'REQUEST_COMPLETED',
