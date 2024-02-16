@@ -22,7 +22,9 @@ import {
 } from './card.db.js';
 import {
   isAccountByAccNumberAvailable,
-  createAccount
+  createAccount,
+  getAllAccountInfo,
+  getAccountById
 } from './account.db.js';
 
 export default {
@@ -43,5 +45,7 @@ export default {
   reactivateCard,
   deleteCard,
   isAccountByAccNumberAvailable,
-  createAccount
+  createAccount,
+  getAllAccountInfo,
+  getAccountById
 };
