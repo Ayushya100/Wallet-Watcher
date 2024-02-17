@@ -98,11 +98,34 @@ const deactivateAccount = async(userId, accountId) => {
     return updatedAccountInfo;
 }
 
+const reactivateAccount = async(userId, accountId) => {
+    const updatedAccountInfo = await Account.findByIdAndUpdate(
+        {
+            _id: accountId,
+            userId: userId
+        },
+        {
+            $set: {
+                isActive: true,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'accountName accountNumber accountDate holderName isActive'
+    );
+    return updatedAccountInfo;
+}
+
 export {
     isAccountByAccNumberAvailable,
     createAccount,
     getAllAccountInfo,
     getAccountById,
     updateExistingAccount,
-    deactivateAccount
+    deactivateAccount,
+    reactivateAccount
 };
