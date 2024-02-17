@@ -5,6 +5,7 @@ import { checkAccountByAccNumber, createAccount } from './createAccount.controll
 import { getAllAccountInfo, getAccountInfoById } from './getAccountInfo.controller.js';
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
 import { isAccountByIdExist } from './shared.controller.js';
+import { deactivateAccount } from './deactivateAccount.controller.js';
 
 export default {
     validateNewAccountPayload,
@@ -13,5 +14,6 @@ export default {
     getAllAccountInfo,
     getAccountInfoById,
     updateAccountInfo,
-    isAccountByIdExist
+    isAccountByIdExist,
+    deactivateAccount
 };
