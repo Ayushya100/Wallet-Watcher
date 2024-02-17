@@ -24,7 +24,8 @@ import {
   isAccountByAccNumberAvailable,
   createAccount,
   getAllAccountInfo,
-  getAccountById
+  getAccountById,
+  updateExistingAccount
 } from './account.db.js';
 
 export default {
@@ -47,5 +48,6 @@ export default {
   isAccountByAccNumberAvailable,
   createAccount,
   getAllAccountInfo,
-  getAccountById
+  getAccountById,
+  updateExistingAccount
 };

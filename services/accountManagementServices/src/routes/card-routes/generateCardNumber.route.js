@@ -3,6 +3,7 @@
 import { ApiResponse, responseCodes, responseMessage } from 'lib-service-comms';
 import cardServices from '../../controllers/card-controllers/index.js';
 
+// API Function
 const generateCardNumber = async(req, res, next) => {
     try {
         const cardNumber = await cardServices.generateCardNumber();

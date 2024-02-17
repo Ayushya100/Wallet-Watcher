@@ -60,6 +60,7 @@ app.get(`${USERS_API}/generate-card-number`, verifyToken(tokenKey), cardRoutes.g
 app.post(`${USERS_API}/:userId/create-account`, verifyToken(tokenKey), accountRoutes.createAccount);
 app.get(`${USERS_API}/:userId/get-account-info`, verifyToken(tokenKey), accountRoutes.getAccountInfo);
 app.get(`${USERS_API}/:userId/get-account-info/:id`, verifyToken(tokenKey), accountRoutes.getAccountInfo);
+app.put(`${USERS_API}/:userId/update-account-info/:id`, verifyToken(tokenKey), accountRoutes.updateAccountInfo);
 
 // Error Handler middleware
 app.use(errorHandler);

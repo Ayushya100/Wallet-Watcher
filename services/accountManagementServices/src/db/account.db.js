@@ -51,9 +51,35 @@ const getAccountById = async(userId, accountId) => {
     return accountInfo;
 }
 
+const updateExistingAccount = async(userId, accountId, payload) => {
+    const existingAccountInfo = await getAccountById(userId, accountId);
+    const updatedAccountInfo = await Account.findByIdAndUpdate(
+        {
+            _id: accountId,
+            userId: userId,
+            isDeleted: false
+        },
+        {
+            $set: {
+                accountDate: payload.accountDate || existingAccountInfo.accountDate,
+                holderName: payload.holderName || existingAccountInfo.holderName,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'accountName accountNumber accountDate holderName isActive'
+    );
+    return updatedAccountInfo;
+}
+
 export {
     isAccountByAccNumberAvailable,
     createAccount,
     getAllAccountInfo,
-    getAccountById
+    getAccountById,
+    updateExistingAccount
 };
