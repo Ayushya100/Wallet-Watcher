@@ -9,25 +9,18 @@ const deleteAccount = async(req, res, next) => {
         const userId = req.params.userId;
         const accountId = req.params.id;
 
-        // Check if Account exist
-        const isAccountAvailable = await accountServices.isAccountByIdExist(userId, accountId);
+        const isAccountDeleted = await accountServices.deleteAccount(userId, accountId);
 
-        if (isAccountAvailable.isValid) {
-            const isAccountDeleted = await accountServices.deleteAccount(userId, accountId);
-
-            if (isAccountDeleted.isValid) {
-                res.status(responseCodes[isAccountDeleted.resType]).json(
-                    new ApiResponse(
-                        responseCodes[isAccountDeleted.resType],
-                        isAccountDeleted.data,
-                        isAccountDeleted.resMsg + ' - ' + responseMessage[isAccountDeleted.resType]
-                    )
-                );
-            } else {
-                return next(isAccountDeleted);
-            }
+        if (isAccountDeleted.isValid) {
+            res.status(responseCodes[isAccountDeleted.resType]).json(
+                new ApiResponse(
+                    responseCodes[isAccountDeleted.resType],
+                    isAccountDeleted.data,
+                    isAccountDeleted.resMsg + ' - ' + responseMessage[isAccountDeleted.resType]
+                )
+            );
         } else {
-            return next(isAccountAvailable);
+            return next(isAccountDeleted);
         }
     } catch (err) {
         next({

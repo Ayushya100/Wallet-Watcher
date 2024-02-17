@@ -9,25 +9,18 @@ const deactivateAccount = async(req, res, next) => {
         const userId = req.params.userId;
         const accountId = req.params.id;
 
-        // Check if account exist
-        const isAccountAvailable = await accountServices.isAccountByIdExist(userId, accountId);
+        const isAccountDeactivated = await accountServices.deactivateAccount(userId, accountId);
 
-        if (isAccountAvailable.isValid) {
-            const isAccountDeactivated = await accountServices.deactivateAccount(userId, accountId);
-
-            if (isAccountDeactivated.isValid) {
-                res.status(responseCodes[isAccountDeactivated.resType]).json(
-                    new ApiResponse(
-                        responseCodes[isAccountDeactivated.resType],
-                        isAccountDeactivated.data,
-                        isAccountDeactivated.resMsg + ' - ' + responseMessage[isAccountDeactivated.resType]
-                    )
-                );
-            } else {
-                return next(isAccountDeactivated);
-            }
+        if (isAccountDeactivated.isValid) {
+            res.status(responseCodes[isAccountDeactivated.resType]).json(
+                new ApiResponse(
+                    responseCodes[isAccountDeactivated.resType],
+                    isAccountDeactivated.data,
+                    isAccountDeactivated.resMsg + ' - ' + responseMessage[isAccountDeactivated.resType]
+                )
+            );
         } else {
-            return next(isAccountAvailable);
+            return next(isAccountDeactivated);
         }
     } catch (err) {
         next({

@@ -8,6 +8,7 @@ import { errorHandler, verifyToken } from 'lib-service-comms';
 
 // User Routes
 import { USERS_API } from './constants.js';
+import { checkCardExist, checkAccountExist } from './middlewares/index.js';
 import userRoutes from './routes/user-routes/index.js';
 import cardRoutes from './routes/card-routes/index.js';
 import accountRoutes from './routes/investment-account-routes/index.js';
@@ -50,20 +51,20 @@ app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getU
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
 app.get(`${USERS_API}/:userId/get-card-info`, verifyToken(tokenKey), cardRoutes.getCardInfo);
 app.get(`${USERS_API}/:userId/get-card-info/:id`, verifyToken(tokenKey), cardRoutes.getCardInfo);
-app.put(`${USERS_API}/:userId/update-card-info/:id`, verifyToken(tokenKey), cardRoutes.updateCardInfo);
-app.put(`${USERS_API}/:userId/deactivate-card/:id`, verifyToken(tokenKey), cardRoutes.deactivateCard);
-app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), cardRoutes.reactivateCard);
-app.delete(`${USERS_API}/:userId/delete-card/:id`, verifyToken(tokenKey), cardRoutes.deleteCard);
+app.put(`${USERS_API}/:userId/update-card-info/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.updateCardInfo);
+app.put(`${USERS_API}/:userId/deactivate-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.deactivateCard);
+app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.reactivateCard);
+app.delete(`${USERS_API}/:userId/delete-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.deleteCard);
 app.get(`${USERS_API}/generate-card-number`, verifyToken(tokenKey), cardRoutes.generateCardNumber);
 
 // Investment Account Routes
 app.post(`${USERS_API}/:userId/create-account`, verifyToken(tokenKey), accountRoutes.createAccount);
 app.get(`${USERS_API}/:userId/get-account-info`, verifyToken(tokenKey), accountRoutes.getAccountInfo);
 app.get(`${USERS_API}/:userId/get-account-info/:id`, verifyToken(tokenKey), accountRoutes.getAccountInfo);
-app.put(`${USERS_API}/:userId/update-account-info/:id`, verifyToken(tokenKey), accountRoutes.updateAccountInfo);
-app.put(`${USERS_API}/:userId/deactivate-account/:id`, verifyToken(tokenKey), accountRoutes.deactivateAccount);
-app.put(`${USERS_API}/:userId/reactivate-account/:id`, verifyToken(tokenKey), accountRoutes.reactivateAccount);
-app.delete(`${USERS_API}/:userId/delete-account/:id`, verifyToken(tokenKey), accountRoutes.deleteAccount);
+app.put(`${USERS_API}/:userId/update-account-info/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.updateAccountInfo);
+app.put(`${USERS_API}/:userId/deactivate-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.deactivateAccount);
+app.put(`${USERS_API}/:userId/reactivate-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.reactivateAccount);
+app.delete(`${USERS_API}/:userId/delete-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.deleteAccount);
 app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRoutes.generateAccountNumber);
 
 // Error Handler middleware

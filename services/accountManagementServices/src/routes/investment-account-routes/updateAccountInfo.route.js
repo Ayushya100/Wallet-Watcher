@@ -10,12 +10,12 @@ const updateAccountInfo = async(req, res, next) => {
         const accountId = req.params.id;
         const payload = req.body;
 
-        // Check if account exist
-        const isAccountAvailable = await accountServices.isAccountByIdExist(userId, accountId);
+        // Validate Payload
+        const isValidPayload = accountServices.validateUpdateAccountPayload(payload); 
 
-        if (isAccountAvailable.isValid) {
+        if (isValidPayload.isValid) {
             const isAccountDetailsUpdated = await accountServices.updateAccountInfo(userId, accountId, payload);
-
+    
             if (isAccountDetailsUpdated.isValid) {
                 res.status(responseCodes[isAccountDetailsUpdated.resType]).json(
                     new ApiResponse(
@@ -28,7 +28,7 @@ const updateAccountInfo = async(req, res, next) => {
                 return next(isAccountDetailsUpdated);
             }
         } else {
-            return next(isAccountAvailable);
+            return next(isValidPayload);
         }
     } catch (err) {
         next({

@@ -11,28 +11,21 @@ const updateCardInfo = async(req, res, next) => {
         const payload = req.body;
 
         // Validate Payload
-        const isValidPayload = await cardServices.validateUpdateCardPayload(payload);
+        const isValidPayload = cardServices.validateUpdateCardPayload(payload);
 
         if (isValidPayload.isValid) {
-            // Check if card details exist
-            const isCardAvailable = await cardServices.isCardByIdExist(userId, cardId);
-    
-            if (isCardAvailable.isValid) {
-                const isCardDetailsUpdated = await cardServices.updateCardinfo(userId, cardId, payload);
-    
-                if (isCardDetailsUpdated.isValid) {
-                    res.status(responseCodes[isCardDetailsUpdated.resType]).json(
-                        new ApiResponse(
-                            responseCodes[isCardDetailsUpdated.resType],
-                            isCardDetailsUpdated.data,
-                            isCardDetailsUpdated.resMsg + ' - ' + responseMessage[isCardDetailsUpdated.resType]
-                        )
-                    );
-                } else {
-                    return next(isCardDetailsUpdated);
-                }
+            const isCardDetailsUpdated = await cardServices.updateCardinfo(userId, cardId, payload);
+
+            if (isCardDetailsUpdated.isValid) {
+                res.status(responseCodes[isCardDetailsUpdated.resType]).json(
+                    new ApiResponse(
+                        responseCodes[isCardDetailsUpdated.resType],
+                        isCardDetailsUpdated.data,
+                        isCardDetailsUpdated.resMsg + ' - ' + responseMessage[isCardDetailsUpdated.resType]
+                    )
+                );
             } else {
-                return next(isCardAvailable);
+                return next(isCardDetailsUpdated);
             }
         } else {
             return next(isValidPayload);
