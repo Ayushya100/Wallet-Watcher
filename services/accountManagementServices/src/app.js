@@ -64,6 +64,7 @@ app.put(`${USERS_API}/:userId/update-account-info/:id`, verifyToken(tokenKey), a
 app.put(`${USERS_API}/:userId/deactivate-account/:id`, verifyToken(tokenKey), accountRoutes.deactivateAccount);
 app.put(`${USERS_API}/:userId/reactivate-account/:id`, verifyToken(tokenKey), accountRoutes.reactivateAccount);
 app.delete(`${USERS_API}/:userId/delete-account/:id`, verifyToken(tokenKey), accountRoutes.deleteAccount);
+app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRoutes.generateAccountNumber);
 
 // Error Handler middleware
 app.use(errorHandler);

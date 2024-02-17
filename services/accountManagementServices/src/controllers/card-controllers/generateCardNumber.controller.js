@@ -8,12 +8,10 @@ const generateCardNumber = async() => {
         let randomCardNumber = '9';
 
         while(isCardGenerationRequired) {
-            console.log(isCardGenerationRequired);
             for (let i = 0; i < 15; i++) {
                 randomCardNumber += Math.floor(Math.random() * 10);
             }
-            randomCardNumber = Number(randomCardNumber)
-            console.log(randomCardNumber);
+            randomCardNumber = Number(randomCardNumber);
             
             const isCardNumberInUse = await dbConnect.isCardByCardNumberAvailable(randomCardNumber);
             

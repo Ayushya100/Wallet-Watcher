@@ -8,6 +8,7 @@ import { isAccountByIdExist } from './shared.controller.js';
 import { deactivateAccount } from './deactivateAccount.controller.js';
 import { reactivateAccount } from './reactivateAccount.controller.js';
 import { deleteAccount } from './deleteAccount.controller.js';
+import { generateAccountNumber } from './generateAccountNumber.controller.js';
 
 export default {
     validateNewAccountPayload,
@@ -19,5 +20,6 @@ export default {
     isAccountByIdExist,
     deactivateAccount,
     reactivateAccount,
-    deleteAccount
+    deleteAccount,
+    generateAccountNumber
 };

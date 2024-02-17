@@ -6,6 +6,7 @@ import updateAccountInfo from './updateAccountInfo.route.js';
 import deactivateAccount from './deactivateAccount.route.js';
 import reactivateAccount from './reactivateAccount.route.js';
 import deleteAccount from './deleteAccount.route.js';
+import generateAccountNumber from './generateAccountNumber.route.js';
 
 export default {
     createAccount,
@@ -13,5 +14,6 @@ export default {
     updateAccountInfo,
     deactivateAccount,
     reactivateAccount,
-    deleteAccount
+    deleteAccount,
+    generateAccountNumber
 };
