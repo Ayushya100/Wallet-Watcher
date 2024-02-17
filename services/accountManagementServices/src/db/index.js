@@ -27,7 +27,8 @@ import {
   getAccountById,
   updateExistingAccount,
   deactivateAccount,
-  reactivateAccount
+  reactivateAccount,
+  deleteAccount
 } from './account.db.js';
 
 export default {
@@ -53,5 +54,6 @@ export default {
   getAccountById,
   updateExistingAccount,
   deactivateAccount,
-  reactivateAccount
+  reactivateAccount,
+  deleteAccount
 };

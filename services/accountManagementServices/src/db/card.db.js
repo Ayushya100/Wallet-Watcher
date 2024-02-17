@@ -102,7 +102,7 @@ const deactivateCard = async(userId, cardId) => {
 }
 
 const reactivateCard = async(userId, cardId) => {
-    const updateCardInfo = await Card.findByIdAndUpdate(
+    const updatedCardInfo = await Card.findByIdAndUpdate(
         {
             _id: cardId,
             userId: userId
@@ -120,11 +120,11 @@ const reactivateCard = async(userId, cardId) => {
     ).select(
         'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
     );
-    return updateCardInfo;
+    return updatedCardInfo;
 }
 
 const deleteCard = async(userId, cardId) => {
-    const updateCardInfo = await Card.findByIdAndUpdate(
+    const updatedCardInfo = await Card.findByIdAndUpdate(
         {
             _id: cardId,
             userId: userId
@@ -143,7 +143,7 @@ const deleteCard = async(userId, cardId) => {
     ).select(
         'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
     );
-    return updateCardInfo;
+    return updatedCardInfo;
 }
 
 export {
