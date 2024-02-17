@@ -6,6 +6,7 @@ import updateCardInfo from './updateCardInfo.route.js';
 import deactivateCard from './deactivateCard.route.js';
 import reactivateCard from './reactivateCard.route.js';
 import deleteCard from './deleteCard.route.js';
+import generateCardNumber from './generateCardNumber.route.js';
 
 export default {
     registerCard,
@@ -13,5 +14,6 @@ export default {
     updateCardInfo,
     deactivateCard,
     reactivateCard,
-    deleteCard
+    deleteCard,
+    generateCardNumber
 };

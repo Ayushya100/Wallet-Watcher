@@ -54,6 +54,7 @@ app.put(`${USERS_API}/:userId/update-card-info/:id`, verifyToken(tokenKey), card
 app.put(`${USERS_API}/:userId/deactivate-card/:id`, verifyToken(tokenKey), cardRoutes.deactivateCard);
 app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), cardRoutes.reactivateCard);
 app.delete(`${USERS_API}/:userId/delete-card/:id`, verifyToken(tokenKey), cardRoutes.deleteCard);
+app.get(`${USERS_API}/generate-card-number`, verifyToken(tokenKey), cardRoutes.generateCardNumber);
 
 // Investment Account Routes
 app.post(`${USERS_API}/:userId/create-account`, verifyToken(tokenKey), accountRoutes.createAccount);
