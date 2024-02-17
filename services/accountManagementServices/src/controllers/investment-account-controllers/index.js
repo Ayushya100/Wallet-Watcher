@@ -1,6 +1,6 @@
 'use strict';
 
-import { validateNewAccountPayload } from './validatePayload.controller.js';
+import { validateNewAccountPayload, validateUpdateAccountPayload } from './validatePayload.controller.js';
 import { checkAccountByAccNumber, createAccount } from './createAccount.controller.js';
 import { getAllAccountInfo, getAccountInfoById } from './getAccountInfo.controller.js';
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
@@ -12,6 +12,7 @@ import { generateAccountNumber } from './generateAccountNumber.controller.js';
 
 export default {
     validateNewAccountPayload,
+    validateUpdateAccountPayload,
     checkAccountByAccNumber,
     createAccount,
     getAllAccountInfo,

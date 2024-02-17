@@ -60,8 +60,8 @@ const validateUpdateCardPayload = (payload) => {
     if (payload.expirationDate) {
         if (!validateExpiryDate(payload.expirationDate)) {
             response.resType = 'BAD_REQUEST';
-        response.resMsg = `Expiration Date must be greater than today's date`;
-        response.isValid = false;
+            response.resMsg = `Expiration Date must be greater than today's date`;
+            response.isValid = false;
         }
     }
     return response;

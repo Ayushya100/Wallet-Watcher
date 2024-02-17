@@ -9,25 +9,18 @@ const deactivateCard = async(req, res, next) => {
         const userId = req.params.userId;
         const cardId = req.params.id;
 
-        // Check if card exist
-        const isCardAvailable = await cardServices.isCardByIdExist(userId, cardId);
+        const isCardDeactivated = await cardServices.deactivateCard(userId, cardId);
 
-        if (isCardAvailable.isValid) {
-            const isCardDeactivated = await cardServices.deactivateCard(userId, cardId);
-
-            if (isCardDeactivated.isValid) {
-                res.status(responseCodes[isCardDeactivated.resType]).json(
-                    new ApiResponse(
-                        responseCodes[isCardDeactivated.resType],
-                        isCardDeactivated.data,
-                        isCardDeactivated.resMsg + ' - ' + responseMessage[isCardDeactivated.resType]
-                    )
-                );
-            } else {
-                return next(isCardDeactivated);
-            }
+        if (isCardDeactivated.isValid) {
+            res.status(responseCodes[isCardDeactivated.resType]).json(
+                new ApiResponse(
+                    responseCodes[isCardDeactivated.resType],
+                    isCardDeactivated.data,
+                    isCardDeactivated.resMsg + ' - ' + responseMessage[isCardDeactivated.resType]
+                )
+            );
         } else {
-            return next(isCardAvailable);
+            return next(isCardDeactivated);
         }
     } catch (err) {
         next({
