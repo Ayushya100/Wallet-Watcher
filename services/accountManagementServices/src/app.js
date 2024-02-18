@@ -47,6 +47,7 @@ app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
 app.post(`${USERS_API}/user-login`, userRoutes.loginUser);
 app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getUserInfo);
+app.post(`${USERS_API}/refresh-token`, userRoutes.refreshAccessToken);
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
