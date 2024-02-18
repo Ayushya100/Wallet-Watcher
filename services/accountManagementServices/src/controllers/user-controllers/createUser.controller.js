@@ -27,6 +27,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
             isValid: false
         };
     }
@@ -61,6 +62,7 @@ const createNewUser = async(payload) => {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
             isValid: false
         };
     }
