@@ -163,6 +163,25 @@ const generateAccessAndRefreshTokens = async(userId) => {
     };
 }
 
+const logoutUser = async(userId) => {
+    await User.findByIdAndUpdate(
+        {
+            _id: userId
+        },
+        {
+            $set: {
+                refreshToken: null,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    );
+    return true;
+}
+
 const getDashboardSettingById = async(userId) => {
     const userDashboardSettings = await UserDashboard.findOne(
         {
@@ -201,6 +220,7 @@ export {
     generateVerificationCode,
     reactivateUser,
     generateAccessAndRefreshTokens,
+    logoutUser,
     getDashboardSettingById,
     updateUserDashboardSetting
 };

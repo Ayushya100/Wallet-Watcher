@@ -9,6 +9,7 @@ import {
   generateVerificationCode,
   reactivateUser,
   generateAccessAndRefreshTokens,
+  logoutUser,
   getDashboardSettingById,
   updateUserDashboardSetting
 } from './users.db.js';
@@ -42,6 +43,7 @@ export default {
   generateVerificationCode,
   reactivateUser,
   generateAccessAndRefreshTokens,
+  logoutUser,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

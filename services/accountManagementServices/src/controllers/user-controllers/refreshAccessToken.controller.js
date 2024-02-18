@@ -25,6 +25,7 @@ const isTokenAvailableAndActive = (refreshToken) => {
         return {
             resType: 'UNAUTHORIZED',
             resMsg: 'UNAUTHORIZED ACCESS - TOKEN EXPIRED / NOT FOUND',
+            stack: err.stack,
             isValid: false
         };
     }
@@ -43,6 +44,7 @@ const refreshTokens = async(userId) => {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: 'Some error occurred while working with db.',
+            stack: err.stack,
             isValid: false
         };
     }
