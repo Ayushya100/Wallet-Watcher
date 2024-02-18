@@ -22,12 +22,12 @@ const getUserInfo = async(req, res, next) => {
             return next(getUserInfo);
         }
     } catch (err) {
-        return {
+        next({
             resType: 'INTERNAL_SERVER_ERROR',
             resMsg: err,
             stack: err.stack,
             isValid: false
-        }
+        });
     }
 }
 
