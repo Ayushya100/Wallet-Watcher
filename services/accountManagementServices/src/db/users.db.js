@@ -174,6 +174,24 @@ const getDashboardSettingById = async(userId) => {
     return userDashboardSettings;
 }
 
+const updateUserDashboardSetting = async(userId, dashboardId, payload) => {
+    const updatedDashboardSettings = await UserDashboard.findByIdAndUpdate(
+        {
+            _id: dashboardId,
+            userId: userId
+        },
+        {
+            $set: payload
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-createdOn -createdBy -modifiedOn -modifiedBy -isDeleted'
+    );
+    return updatedDashboardSettings;
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
@@ -183,5 +201,6 @@ export {
     generateVerificationCode,
     reactivateUser,
     generateAccessAndRefreshTokens,
-    getDashboardSettingById
+    getDashboardSettingById,
+    updateUserDashboardSetting
 };
