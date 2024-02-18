@@ -9,7 +9,8 @@ import {
   generateVerificationCode,
   reactivateUser,
   generateAccessAndRefreshTokens,
-  getDashboardSettingById
+  getDashboardSettingById,
+  updateUserDashboardSetting
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -57,5 +58,6 @@ export default {
   deactivateAccount,
   reactivateAccount,
   deleteAccount,
-  getDashboardSettingById
+  getDashboardSettingById,
+  updateUserDashboardSetting
 };
