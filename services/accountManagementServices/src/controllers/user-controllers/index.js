@@ -14,6 +14,7 @@ import {
   isUserActive,
   generateAccessAndRefreshTokens
 } from './loginUser.controller.js';
+import { isTokenAvailableAndActive, refreshTokens } from './refreshAccessToken.controller.js';
 
 export default {
   validateRegisterUserPayload,
@@ -27,4 +28,6 @@ export default {
   isUserVerified,
   isUserActive,
   generateAccessAndRefreshTokens,
+  isTokenAvailableAndActive,
+  refreshTokens
 };
