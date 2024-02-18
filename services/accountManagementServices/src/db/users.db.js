@@ -163,6 +163,17 @@ const generateAccessAndRefreshTokens = async(userId) => {
     };
 }
 
+const getDashboardSettingById = async(userId) => {
+    const userDashboardSettings = await UserDashboard.findOne(
+        {
+            userId: userId
+        }
+    ).select(
+        '-createdOn -createdBy -modifiedOn -modifiedBy -isDeleted'
+    );
+    return userDashboardSettings;
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
@@ -171,5 +182,6 @@ export {
     verifyPassword,
     generateVerificationCode,
     reactivateUser,
-    generateAccessAndRefreshTokens
+    generateAccessAndRefreshTokens,
+    getDashboardSettingById
 };

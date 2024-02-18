@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import {
   isUserByUserNameOrEmailAvailable,
@@ -8,7 +8,8 @@ import {
   verifyPassword,
   generateVerificationCode,
   reactivateUser,
-  generateAccessAndRefreshTokens
+  generateAccessAndRefreshTokens,
+  getDashboardSettingById
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -55,5 +56,6 @@ export default {
   updateExistingAccount,
   deactivateAccount,
   reactivateAccount,
-  deleteAccount
+  deleteAccount,
+  getDashboardSettingById
 };

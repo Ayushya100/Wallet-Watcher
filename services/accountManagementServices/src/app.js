@@ -12,6 +12,7 @@ import { checkCardExist, checkAccountExist } from './middlewares/index.js';
 import userRoutes from './routes/user-routes/index.js';
 import cardRoutes from './routes/card-routes/index.js';
 import accountRoutes from './routes/investment-account-routes/index.js';
+import dashboardRoutes from './routes/user-dashboard-routes/index.js';
 
 const app = express();
 
@@ -66,6 +67,9 @@ app.put(`${USERS_API}/:userId/deactivate-account/:id`, verifyToken(tokenKey), ch
 app.put(`${USERS_API}/:userId/reactivate-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.reactivateAccount);
 app.delete(`${USERS_API}/:userId/delete-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.deleteAccount);
 app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRoutes.generateAccountNumber);
+
+// User Dashboard Setting Routes
+app.get(`${USERS_API}/:userId/get-dashboard-settings`, verifyToken(tokenKey), dashboardRoutes.getUserDashboardSetting);
 
 // Error Handler middleware
 app.use(errorHandler);
