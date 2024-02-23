@@ -183,7 +183,7 @@ const logoutUser = async(userId) => {
 }
 
 const updateUserInfo = async(userId, payload) => {
-    const userCurrentInfo = await isUserByIdAvailable(userId);
+    const currentUserInfo = await isUserByIdAvailable(userId);
 
     const updatedUserInfo = await User.findByIdAndUpdate(
         {
@@ -191,13 +191,13 @@ const updateUserInfo = async(userId, payload) => {
         },
         {
             $set: {
-                firstName: payload.firstName || userCurrentInfo.firstName,
-                lastName: payload.lastName || userCurrentInfo.lastName,
-                userName: payload.userName || userCurrentInfo.userName,
-                bio: payload.bio || userCurrentInfo.bio,
-                gender: payload.gender || userCurrentInfo.gender,
-                dob: payload.dob || userCurrentInfo.dob,
-                contactNumber: payload.contactNumber || userCurrentInfo.contactNumber,
+                firstName: payload.firstName || currentUserInfo.firstName,
+                lastName: payload.lastName || currentUserInfo.lastName,
+                userName: payload.userName || currentUserInfo.userName,
+                bio: payload.bio || currentUserInfo.bio,
+                gender: payload.gender || currentUserInfo.gender,
+                dob: payload.dob || currentUserInfo.dob,
+                contactNumber: payload.contactNumber || currentUserInfo.contactNumber,
                 modifiedOn: Date.now(),
                 modifiedBy: userId
             }
@@ -208,6 +208,26 @@ const updateUserInfo = async(userId, payload) => {
     ).select(
         '-password -refreshToken -isDeleted -createdBy -modifiedBy'
     );
+    return updatedUserInfo;
+}
+
+const updateUserPassword = async(userId, payload) => {
+    const currentUserInfo = await User.findOne({
+        _id: userId
+    });
+
+    if (!(await currentUserInfo.isPasswordCorrect(payload.oldPassword))) {
+        return false;
+    }
+
+    currentUserInfo.password = payload.newPassword;
+    currentUserInfo.modifiedOn = Date.now();
+    currentUserInfo.modifiedBy = userId;
+    await currentUserInfo.save({
+        validateBeforeSave: false
+    });
+
+    const updatedUserInfo = await isUserByIdAvailable(userId);
     return updatedUserInfo;
 }
 
@@ -252,5 +272,6 @@ export {
     logoutUser,
     getDashboardSettingById,
     updateUserDashboardSetting,
-    updateUserInfo
+    updateUserInfo,
+    updateUserPassword
 };
