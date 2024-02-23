@@ -119,9 +119,33 @@ const validateUserDetailsPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameters check for updating user password
+const validatePasswordUpdatePayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.oldPassword || !payload.newPassword) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required Parameter is missing';
+        response.isValid = false;
+    }
+
+    if (!validPassword(payload.newPassword)) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Pattern invalid. New Password incorrect';
+        response.isValid = false;
+    }
+
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
-    validateUserDetailsPayload
+    validateUserDetailsPayload,
+    validatePasswordUpdatePayload
 };

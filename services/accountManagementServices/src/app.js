@@ -50,6 +50,7 @@ app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getU
 app.post(`${USERS_API}/refresh-token`, userRoutes.refreshAccessToken);
 app.post(`${USERS_API}/logout-user`, verifyToken(tokenKey), userRoutes.logoutUser);
 app.put(`${USERS_API}/update-profile/:userId`, verifyToken(tokenKey), userRoutes.updateUserDetails);
+app.put(`${USERS_API}/update-user-password/:userId`, verifyToken(tokenKey), userRoutes.updateUserPassword);
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
