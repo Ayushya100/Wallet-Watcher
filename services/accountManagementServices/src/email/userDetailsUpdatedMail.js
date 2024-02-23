@@ -2,19 +2,23 @@
 
 import transporter from './emailConnection.js';
 
-const sendVerificationSuccessfulMail = (userInfo) => {
+const userDetailsUpdatedSuccessfullyMail = (userInfo) => {
     const mailOptions = {
         from: 'Wallet watcher',
         to: userInfo.emailId,
-        subject: 'Account Verified - Welcome to Wallet watcher',
-        template: 'verificationSuccessfulMail',
+        subject: 'Account Details Successfully Updated',
+        template: 'userUpdatedMail',
         context: {
             fullName: userInfo.firstName + ' ' + userInfo.lastName,
             firstName: userInfo.firstName,
             lastName: userInfo.lastName,
             userName: userInfo.userName,
-            contactNumber: userInfo.contactNumber,
             emailId: userInfo.emailId,
+            contactNumber: userInfo.contactNumber,
+            dob: userInfo.dob.toDateString(),
+            bio: userInfo.bio,
+            createdOn: userInfo.createdOn.toDateString(),
+            lastLogin: userInfo.lastLogin.toDateString(),
             custContactEmailId: process.env.EMAIL_USER
         }
     };
@@ -28,4 +32,4 @@ const sendVerificationSuccessfulMail = (userInfo) => {
     });
 }
 
-export default sendVerificationSuccessfulMail;
+export default userDetailsUpdatedSuccessfullyMail;

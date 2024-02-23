@@ -182,6 +182,33 @@ const logoutUser = async(userId) => {
     return true;
 }
 
+const updateUserInfo = async(userId, payload) => {
+    const userCurrentInfo = await isUserByIdAvailable(userId);
+
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {
+            _id: userId
+        },
+        {
+            $set: {
+                firstName: payload.firstName || userCurrentInfo.firstName,
+                lastName: payload.lastName || userCurrentInfo.lastName,
+                userName: payload.userName || userCurrentInfo.userName,
+                bio: payload.bio || userCurrentInfo.bio,
+                gender: payload.gender || userCurrentInfo.gender,
+                dob: payload.dob || userCurrentInfo.dob,
+                contactNumber: payload.contactNumber || userCurrentInfo.contactNumber
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -refreshToken -isDeleted -createdBy -modifiedBy'
+    );
+    return updatedUserInfo;
+}
+
 const getDashboardSettingById = async(userId) => {
     const userDashboardSettings = await UserDashboard.findOne(
         {
@@ -222,5 +249,6 @@ export {
     generateAccessAndRefreshTokens,
     logoutUser,
     getDashboardSettingById,
-    updateUserDashboardSetting
+    updateUserDashboardSetting,
+    updateUserInfo
 };

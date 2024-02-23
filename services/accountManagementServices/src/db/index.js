@@ -11,7 +11,8 @@ import {
   generateAccessAndRefreshTokens,
   logoutUser,
   getDashboardSettingById,
-  updateUserDashboardSetting
+  updateUserDashboardSetting,
+  updateUserInfo
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -44,6 +45,7 @@ export default {
   reactivateUser,
   generateAccessAndRefreshTokens,
   logoutUser,
+  updateUserInfo,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,
