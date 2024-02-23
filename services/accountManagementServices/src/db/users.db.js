@@ -197,7 +197,9 @@ const updateUserInfo = async(userId, payload) => {
                 bio: payload.bio || userCurrentInfo.bio,
                 gender: payload.gender || userCurrentInfo.gender,
                 dob: payload.dob || userCurrentInfo.dob,
-                contactNumber: payload.contactNumber || userCurrentInfo.contactNumber
+                contactNumber: payload.contactNumber || userCurrentInfo.contactNumber,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
             }
         },
         {
