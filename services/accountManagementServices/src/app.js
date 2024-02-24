@@ -51,6 +51,7 @@ app.post(`${USERS_API}/refresh-token`, userRoutes.refreshAccessToken);
 app.post(`${USERS_API}/logout-user`, verifyToken(tokenKey), userRoutes.logoutUser);
 app.put(`${USERS_API}/update-profile/:userId`, verifyToken(tokenKey), userRoutes.updateUserDetails);
 app.put(`${USERS_API}/update-user-password/:userId`, verifyToken(tokenKey), userRoutes.updateUserPassword);
+app.put(`${USERS_API}/deactivate-user/:userId`, verifyToken(tokenKey), userRoutes.deactivateUser);
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);

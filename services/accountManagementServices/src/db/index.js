@@ -13,7 +13,10 @@ import {
   getDashboardSettingById,
   updateUserDashboardSetting,
   updateUserInfo,
-  updateUserPassword
+  updateUserPassword,
+  getCompleteUserInfoById,
+  isPasswordValid,
+  userDeactivate
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -48,6 +51,9 @@ export default {
   logoutUser,
   updateUserInfo,
   updateUserPassword,
+  getCompleteUserInfoById,
+  isPasswordValid,
+  userDeactivate,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

@@ -5,7 +5,8 @@ import {
   validateUserVerificationPayload,
   validateUserLoginPayload,
   validateUserDetailsPayload,
-  validatePasswordUpdatePayload
+  validatePasswordUpdatePayload,
+  validateDeactivateUserPayload
 } from './validatePayload.controller.js';
 import { checkUserByUserNameOrEmail, createNewUser } from './createUser.controller.js';
 import { checkUserById } from './shared.controller.js';
@@ -20,6 +21,7 @@ import { isTokenAvailableAndActive, refreshTokens } from './refreshAccessToken.c
 import { logoutUser } from './logoutUser.controller.js';
 import { updateUserDetails } from './updateUserDetails.controller.js';
 import { updateUserPassword } from './updateUserPassword.controller.js';
+import { validateUserCredentials, deactivateUser } from './deactivateUser.controller.js';
 
 export default {
   validateRegisterUserPayload,
@@ -27,6 +29,7 @@ export default {
   validateUserLoginPayload,
   validateUserDetailsPayload,
   validatePasswordUpdatePayload,
+  validateDeactivateUserPayload,
   checkUserByUserNameOrEmail,
   createNewUser,
   checkUserById,
@@ -39,5 +42,7 @@ export default {
   refreshTokens,
   logoutUser,
   updateUserDetails,
-  updateUserPassword
+  updateUserPassword,
+  validateUserCredentials,
+  deactivateUser
 };

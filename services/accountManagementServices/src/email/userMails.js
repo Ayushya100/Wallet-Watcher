@@ -103,10 +103,28 @@ const passwordUpdatedSuccessfullMail = (emailId, fullName) => {
     sendMail(emailId, mailOptions);
 }
 
+const accountDeactivatedMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Account Deactivation Confirmation',
+        template: 'accountDeactivatedMail',
+        context: {
+            fullName: payload.fullName,
+            dateOfDeactivation: payload.dateOfDeactivation,
+            reactivationTimeline: payload.reactivationTimeline,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
     sendVerificationMail,
     sendVerificationSuccessfulMail,
     accountReactivatedMail,
     userDetailsUpdatedSuccessfullyMail,
-    passwordUpdatedSuccessfullMail
+    passwordUpdatedSuccessfullMail,
+    accountDeactivatedMail
 }

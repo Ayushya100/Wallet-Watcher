@@ -28,6 +28,20 @@ const isUserByIdAvailable = async(userId) => {
     return isUserExist;
 }
 
+const isPasswordValid = async(user, password) => {
+    if (!(await user.isPasswordCorrect(password))) {
+        return false;
+    }
+    return true;
+}
+
+const getCompleteUserInfoById = async(userId) => {
+    const userInfo = await User.findById({
+        _id: userId
+    });
+    return userInfo;
+}
+
 const generateVerificationCode = async(userId) => {
     const user = await User.findById({ _id: userId });
     const verificationCode = uuidv4() + user._id;
@@ -216,18 +230,38 @@ const updateUserPassword = async(userId, payload) => {
         _id: userId
     });
 
-    if (!(await currentUserInfo.isPasswordCorrect(payload.oldPassword))) {
-        return false;
+    if (await isPasswordValid(currentUserInfo, payload.oldPassword)) {
+        currentUserInfo.password = payload.newPassword;
+        currentUserInfo.modifiedOn = Date.now();
+        currentUserInfo.modifiedBy = userId;
+        await currentUserInfo.save({
+            validateBeforeSave: false
+        });
+    
+        const updatedUserInfo = await isUserByIdAvailable(userId);
+        return updatedUserInfo;
     }
+    return false;
+}
 
-    currentUserInfo.password = payload.newPassword;
-    currentUserInfo.modifiedOn = Date.now();
-    currentUserInfo.modifiedBy = userId;
-    await currentUserInfo.save({
-        validateBeforeSave: false
-    });
-
-    const updatedUserInfo = await isUserByIdAvailable(userId);
+const userDeactivate = async(userId) => {
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {
+            _id: userId
+        },
+        {
+            $set: {
+                isDeleted: true,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -createdBy -modifiedBy'
+    );
     return updatedUserInfo;
 }
 
@@ -273,5 +307,8 @@ export {
     getDashboardSettingById,
     updateUserDashboardSetting,
     updateUserInfo,
-    updateUserPassword
+    updateUserPassword,
+    isPasswordValid,
+    getCompleteUserInfoById,
+    userDeactivate
 };
