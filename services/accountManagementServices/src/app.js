@@ -53,6 +53,7 @@ app.put(`${USERS_API}/update-profile/:userId`, verifyToken(tokenKey), userRoutes
 app.put(`${USERS_API}/update-user-password/:userId`, verifyToken(tokenKey), userRoutes.updateUserPassword);
 app.put(`${USERS_API}/deactivate-user/:userId`, verifyToken(tokenKey), userRoutes.deactivateUser);
 app.put(`${USERS_API}/update-profile-image/:userId`, verifyToken(tokenKey), upload.single('profileImage'), userRoutes.updateProfileImage);
+app.delete(`${USERS_API}/delete-profile-image/:userId`, verifyToken(tokenKey), userRoutes.deleteProfileImage);
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);

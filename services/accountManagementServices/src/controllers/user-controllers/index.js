@@ -23,7 +23,7 @@ import { logoutUser } from './logoutUser.controller.js';
 import { updateUserDetails } from './updateUserDetails.controller.js';
 import { updateUserPassword } from './updateUserPassword.controller.js';
 import { validateUserCredentials, deactivateUser } from './deactivateUser.controller.js';
-import { updateProfileImage } from './updateProfileImage.controller.js';
+import { updateProfileImage, deleteProfileImage } from './profileImage.controller.js';
 
 export default {
   validateRegisterUserPayload,
@@ -48,5 +48,6 @@ export default {
   updateUserPassword,
   validateUserCredentials,
   deactivateUser,
-  updateProfileImage
+  updateProfileImage,
+  deleteProfileImage
 };
