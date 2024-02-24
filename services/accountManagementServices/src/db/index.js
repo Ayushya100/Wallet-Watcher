@@ -16,7 +16,8 @@ import {
   updateUserPassword,
   getCompleteUserInfoById,
   isPasswordValid,
-  userDeactivate
+  userDeactivate,
+  updateProfileImage
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -54,6 +55,7 @@ export default {
   getCompleteUserInfoById,
   isPasswordValid,
   userDeactivate,
+  updateProfileImage,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

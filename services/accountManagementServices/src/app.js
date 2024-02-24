@@ -8,7 +8,7 @@ import { errorHandler, verifyToken } from 'lib-service-comms';
 
 // User Routes
 import { USERS_API } from './constants.js';
-import { checkCardExist, checkAccountExist } from './middlewares/index.js';
+import { checkCardExist, checkAccountExist, upload } from './middlewares/index.js';
 import userRoutes from './routes/user-routes/index.js';
 import cardRoutes from './routes/card-routes/index.js';
 import accountRoutes from './routes/investment-account-routes/index.js';
@@ -52,6 +52,7 @@ app.post(`${USERS_API}/logout-user`, verifyToken(tokenKey), userRoutes.logoutUse
 app.put(`${USERS_API}/update-profile/:userId`, verifyToken(tokenKey), userRoutes.updateUserDetails);
 app.put(`${USERS_API}/update-user-password/:userId`, verifyToken(tokenKey), userRoutes.updateUserPassword);
 app.put(`${USERS_API}/deactivate-user/:userId`, verifyToken(tokenKey), userRoutes.deactivateUser);
+app.put(`${USERS_API}/update-profile-image/:userId`, verifyToken(tokenKey), upload.single('profileImage'), userRoutes.updateProfileImage);
 
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
