@@ -6,7 +6,8 @@ import {
   sendVerificationSuccessfulMail,
   accountReactivatedMail,
   userDetailsUpdatedSuccessfullyMail,
-  passwordUpdatedSuccessfullMail
+  passwordUpdatedSuccessfullMail,
+  accountDeactivatedMail
 } from './userMails.js';
 
 export default {
@@ -15,5 +16,6 @@ export default {
   sendVerificationSuccessfulMail,
   accountReactivatedMail,
   userDetailsUpdatedSuccessfullyMail,
-  passwordUpdatedSuccessfullMail
+  passwordUpdatedSuccessfullMail,
+  accountDeactivatedMail
 };

@@ -129,7 +129,7 @@ const validatePasswordUpdatePayload = (payload) => {
 
     if (!payload.oldPassword || !payload.newPassword) {
         response.resType = 'BAD_REQUEST';
-        response.resMsg = 'Required Parameter is missing';
+        response.resMsg = 'Required Parameters are missing';
         response.isValid = false;
     }
 
@@ -142,10 +142,27 @@ const validatePasswordUpdatePayload = (payload) => {
     return response;
 }
 
+// Mandatory parameters check for deactivate user
+const validateDeactivateUserPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userName || !payload.password) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required Parameters are missing';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
     validateUserDetailsPayload,
-    validatePasswordUpdatePayload
+    validatePasswordUpdatePayload,
+    validateDeactivateUserPayload
 };
