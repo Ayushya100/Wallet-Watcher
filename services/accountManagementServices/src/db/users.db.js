@@ -265,6 +265,27 @@ const userDeactivate = async(userId) => {
     return updatedUserInfo;
 }
 
+const updateProfileImage = async(userId, cloudinaryImageURL) => {
+    const updatedUserInfo = await User.findByIdAndUpdate(
+        {
+            _id: userId
+        },
+        {
+            $set: {
+                profileImageURL: cloudinaryImageURL,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        '-password -isVerified -isDeleted -verificationCode -refreshToken -createdBy -modifiedBy'
+    );
+    return updatedUserInfo;
+}
+
 const getDashboardSettingById = async(userId) => {
     const userDashboardSettings = await UserDashboard.findOne(
         {
@@ -310,5 +331,6 @@ export {
     updateUserPassword,
     isPasswordValid,
     getCompleteUserInfoById,
-    userDeactivate
+    userDeactivate,
+    updateProfileImage
 };

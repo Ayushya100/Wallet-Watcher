@@ -158,11 +158,28 @@ const validateDeactivateUserPayload = (payload) => {
     return response;
 }
 
+// Mandatory parameter check for updating profile image
+const validateProfileImagePayload = (profileImagePath) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!profileImagePath) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required Parameter is missing';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
     validateUserLoginPayload,
     validateUserDetailsPayload,
     validatePasswordUpdatePayload,
-    validateDeactivateUserPayload
+    validateDeactivateUserPayload,
+    validateProfileImagePayload
 };
