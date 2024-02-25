@@ -7,7 +7,8 @@ import {
   accountReactivatedMail,
   userDetailsUpdatedSuccessfullyMail,
   passwordUpdatedSuccessfullMail,
-  accountDeactivatedMail
+  accountDeactivatedMail,
+  requestPasswordResetMail
 } from './userMails.js';
 
 export default {
@@ -17,5 +18,6 @@ export default {
   accountReactivatedMail,
   userDetailsUpdatedSuccessfullyMail,
   passwordUpdatedSuccessfullMail,
-  accountDeactivatedMail
+  accountDeactivatedMail,
+  requestPasswordResetMail
 };

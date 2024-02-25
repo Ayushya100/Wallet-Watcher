@@ -38,6 +38,39 @@ const updateUserPassword = async(userId, payload) => {
     }
 }
 
+const requestReset = async(user) => {
+    try {
+        const updatedUserInfo = await dbConnect.generateVerificationCode(user._id);
+
+        emailServices.requestPasswordResetMail({
+            fullName: updatedUserInfo.firstName + ' ' + updatedUserInfo.lastName,
+            custId: updatedUserInfo._id,
+            emailId: updatedUserInfo.emailId,
+            verificationCode: updatedUserInfo.verificationCode
+        });
+        return {
+            resType: 'REQUEST_COMPLETED',
+            resMsg: 'RESET LINK SENT',
+            data: {
+                firstName: updatedUserInfo.firstName,
+                lastName: updatedUserInfo.lastName,
+                userName: updatedUserInfo.userName,
+                emailId: updatedUserInfo.emailId,
+                verificationCode: updatedUserInfo.verificationCode
+            },
+            isValid: true
+        };
+    } catch (err) {
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
-    updateUserPassword
+    updateUserPassword,
+    requestReset
 };
