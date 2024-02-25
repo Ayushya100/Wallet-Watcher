@@ -9,7 +9,7 @@ const updateUserPassword = async(userId, payload) => {
             const isPasswordUpdated = await dbConnect.updateUserPassword(userId, payload);
 
             if (isPasswordUpdated) {
-                emailServices.passwordUpdatedSuccessfullMail(isPasswordUpdated.emailId, isPasswordUpdated.firstName + ' ' + isPasswordUpdated.lastName)
+                emailServices.passwordUpdatedSuccessfullMail(isPasswordUpdated.emailId, isPasswordUpdated.firstName + ' ' + isPasswordUpdated.lastName);
                 return {
                     resType: 'REQUEST_COMPLETED',
                     resMsg: 'PASSWORD UPDATED',
@@ -70,7 +70,51 @@ const requestReset = async(user) => {
     }
 }
 
+const resetPassword = async(userId, payload) => {
+    try {
+        const currentTime = Date.now();
+        const verificationTime = Math.ceil((currentTime - payload.time) / (30 * 60 * 1000));
+
+        const userInfo = await dbConnect.getCompleteUserInfoById(userId);
+
+        if ((verificationTime <= 1) && (payload.verificationCode === userInfo.verificationCode)) {
+            const isPasswordSame = await dbConnect.verifyPassword(userInfo, payload.password);
+
+            if (!isPasswordSame) {
+                const isPasswordUpdated = await dbConnect.resetUserPassword(userId, payload.password);
+                
+                emailServices.passwordUpdatedSuccessfullMail(isPasswordUpdated.emailId, isPasswordUpdated.firstName + ' ' + isPasswordUpdated.lastName);
+                return {
+                    resType: 'REQUEST_COMPLETED',
+                    resMsg: 'PASSWORD RESET SUCCESSFULL',
+                    data: isPasswordUpdated,
+                    isValid: true
+                };
+            }
+            return {
+                resType: 'BAD_REQUEST',
+                resMsg: 'NEW PASSWORD CANNOT BE SAME AS OLD',
+                isValid: false
+            };
+        }
+
+        return {
+            resType: 'BAD_REQUEST',
+            resMsg: 'USER VERIFICATION FAILED',
+            isValid: false
+        };
+    } catch (err) {
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
     updateUserPassword,
-    requestReset
+    requestReset,
+    resetPassword
 };

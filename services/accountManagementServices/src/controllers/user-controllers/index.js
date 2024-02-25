@@ -8,7 +8,8 @@ import {
   validatePasswordUpdatePayload,
   validateDeactivateUserPayload,
   validateProfileImagePayload,
-  validateResetRequestPayload
+  validateResetRequestPayload,
+  validateResetPasswordPayload
 } from './validatePayload.controller.js';
 import { checkUserByUserNameOrEmail, createNewUser } from './createUser.controller.js';
 import { checkUserById, checkUserByEmailOrUserName } from './shared.controller.js';
@@ -22,7 +23,7 @@ import {
 import { isTokenAvailableAndActive, refreshTokens } from './refreshAccessToken.controller.js';
 import { logoutUser } from './logoutUser.controller.js';
 import { updateUserDetails } from './updateUserDetails.controller.js';
-import { updateUserPassword, requestReset } from './updateUserPassword.controller.js';
+import { updateUserPassword, requestReset, resetPassword } from './updateUserPassword.controller.js';
 import { validateUserCredentials, deactivateUser } from './deactivateUser.controller.js';
 import { updateProfileImage, deleteProfileImage } from './profileImage.controller.js';
 
@@ -35,6 +36,7 @@ export default {
   validateDeactivateUserPayload,
   validateProfileImagePayload,
   validateResetRequestPayload,
+  validateResetPasswordPayload,
   checkUserByUserNameOrEmail,
   createNewUser,
   checkUserById,
@@ -53,5 +55,6 @@ export default {
   updateProfileImage,
   deleteProfileImage,
   checkUserByEmailOrUserName,
-  requestReset
+  requestReset,
+  resetPassword
 };
