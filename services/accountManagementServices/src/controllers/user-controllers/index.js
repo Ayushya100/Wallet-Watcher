@@ -7,10 +7,11 @@ import {
   validateUserDetailsPayload,
   validatePasswordUpdatePayload,
   validateDeactivateUserPayload,
-  validateProfileImagePayload
+  validateProfileImagePayload,
+  validateResetRequestPayload
 } from './validatePayload.controller.js';
 import { checkUserByUserNameOrEmail, createNewUser } from './createUser.controller.js';
-import { checkUserById } from './shared.controller.js';
+import { checkUserById, checkUserByEmailOrUserName } from './shared.controller.js';
 import { verifyUser } from './verifyUser.controller.js';
 import {
   isUserValid,
@@ -21,7 +22,7 @@ import {
 import { isTokenAvailableAndActive, refreshTokens } from './refreshAccessToken.controller.js';
 import { logoutUser } from './logoutUser.controller.js';
 import { updateUserDetails } from './updateUserDetails.controller.js';
-import { updateUserPassword } from './updateUserPassword.controller.js';
+import { updateUserPassword, requestReset } from './updateUserPassword.controller.js';
 import { validateUserCredentials, deactivateUser } from './deactivateUser.controller.js';
 import { updateProfileImage, deleteProfileImage } from './profileImage.controller.js';
 
@@ -33,6 +34,7 @@ export default {
   validatePasswordUpdatePayload,
   validateDeactivateUserPayload,
   validateProfileImagePayload,
+  validateResetRequestPayload,
   checkUserByUserNameOrEmail,
   createNewUser,
   checkUserById,
@@ -49,5 +51,7 @@ export default {
   validateUserCredentials,
   deactivateUser,
   updateProfileImage,
-  deleteProfileImage
+  deleteProfileImage,
+  checkUserByEmailOrUserName,
+  requestReset
 };

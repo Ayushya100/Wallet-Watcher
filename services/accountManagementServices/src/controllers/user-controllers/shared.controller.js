@@ -30,6 +30,35 @@ const checkUserById = async(userId) => {
     }
 }
 
+const checkUserByEmailOrUserName = async(userNameOrEmail) => {
+    try {
+        const response = {
+            resType: 'NOT_FOUND',
+            resMsg: 'USER NOT FOUND',
+            data: null,
+            isValid: false
+        };
+
+        const isUserAvailable = await dbConnect.isUserByUserNameOrEmailAvailable(userNameOrEmail, userNameOrEmail);
+
+        if (isUserAvailable) {
+            response.resType = 'SUCCESS';
+            response.resMsg = 'VALIDATION SUCCESSFUL';
+            response.data = isUserAvailable;
+            response.isValid = true;
+        }
+        return response;
+    } catch (err) {
+        return {
+            resType: 'INTERNAL_SERVER_ERROR',
+            resMsg: err,
+            stack: err.stack,
+            isValid: false
+        };
+    }
+}
+
 export {
-    checkUserById
+    checkUserById,
+    checkUserByEmailOrUserName
 };

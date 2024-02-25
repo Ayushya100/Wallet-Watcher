@@ -120,11 +120,28 @@ const accountDeactivatedMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const requestPasswordResetMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Reset your Password',
+        template: 'requestPasswordResetMail',
+        context: {
+            fullName: payload.fullName,
+            verificationCode: FRONTEND_URL + '/reset-password/' + payload.custId + '/' + Date.now() + '/' + payload.verificationCode,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
     sendVerificationMail,
     sendVerificationSuccessfulMail,
     accountReactivatedMail,
     userDetailsUpdatedSuccessfullyMail,
     passwordUpdatedSuccessfullMail,
-    accountDeactivatedMail
+    accountDeactivatedMail,
+    requestPasswordResetMail
 }
