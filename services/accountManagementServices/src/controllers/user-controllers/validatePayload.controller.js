@@ -190,6 +190,22 @@ const validateResetRequestPayload = (userNameOrEmail) => {
     return response;
 }
 
+// Mandatory parameter check for resetting password
+const validateResetPasswordPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.time || !payload.verificationCode || !payload.password) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Required Parameters are missing';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateRegisterUserPayload,
     validateUserVerificationPayload,
@@ -198,5 +214,6 @@ export {
     validatePasswordUpdatePayload,
     validateDeactivateUserPayload,
     validateProfileImagePayload,
-    validateResetRequestPayload
+    validateResetRequestPayload,
+    validateResetPasswordPayload
 };

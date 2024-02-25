@@ -307,6 +307,23 @@ const deleteProfileImage = async(userId) => {
     return updatedUserInfo;
 }
 
+const resetUserPassword = async(userId, password) => {
+    const currentUserInfo = await User.findOne({
+        _id: userId
+    });
+
+    currentUserInfo.password = password;
+    currentUserInfo.verificationCode = '';
+    currentUserInfo.modifiedOn = Date.now();
+    currentUserInfo.modifiedBy = userId;
+    await currentUserInfo.save({
+        validateBeforeSave: false
+    });
+
+    const updatedUserInfo = await isUserByIdAvailable(userId);
+    return updatedUserInfo;
+}
+
 const getDashboardSettingById = async(userId) => {
     const userDashboardSettings = await UserDashboard.findOne(
         {
@@ -354,5 +371,6 @@ export {
     getCompleteUserInfoById,
     userDeactivate,
     updateProfileImage,
-    deleteProfileImage
+    deleteProfileImage,
+    resetUserPassword
 };
