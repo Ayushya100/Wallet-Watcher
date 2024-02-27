@@ -8,12 +8,15 @@ const cardInfoModel = (mongoose) => {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
             },
-            cardNumber: {
-                type: Number,
-                required: true,
+            token: {
+                type: String,
                 unique: true,
-                minlength: 16,
-                maxlength: 16
+                required: true
+            },
+            cardNumber: {
+                type: String,
+                required: true,
+                unique: true
             },
             cardType: {
                 type: String,
@@ -24,7 +27,7 @@ const cardInfoModel = (mongoose) => {
                 required: true
             },
             expirationDate: {
-                type: Date,
+                type: String,
                 required: true
             },
             holderName: {

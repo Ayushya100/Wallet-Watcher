@@ -1,17 +1,7 @@
 'use strict';
 
-import transporter from './emailConnection.js';
+import sendMail from './sendMails.js';
 import { FRONTEND_URL } from '../constants.js';
-
-const sendMail = (emailId, mailOptions) => {
-    transporter.sendMail(mailOptions, (err, info) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(`Email has been sent to: ${emailId}`);
-        }
-    });
-}
 
 const sendVerificationMail = (custId, emailId, fullName, verificationCode) => {
     const mailOptions = {
