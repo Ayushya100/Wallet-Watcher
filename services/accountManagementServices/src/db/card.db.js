@@ -17,6 +17,7 @@ const isCardByCardNumberAvailable = async(cardNumber) => {
 const createNewCard = async(userId, payload) => {
     const newCard = await Card.create({
         userId: userId,
+        token: payload.token,
         cardNumber: payload.cardNumber,
         cardType: payload.cardType,
         bankInfo: payload.bankInfo,

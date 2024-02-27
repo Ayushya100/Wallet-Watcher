@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation: New Card Registration</title>
+
+    <style>
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .message-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        .info {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-span {
+            font-weight: normal;
+        }
+        .from-reg {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 2px;
+        }
+        .from {
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+    <div class="username">Dear {{ fullName }},</div>
+    <div class="message">We're excited to inform you that a new payment card has been successfully registered to your account on Wallet watcher. This additional card provides you with enhanced convenience and flexibility in managing your transactions and payments.</div>
+    <div class="message">Here are the details of your newly registered card:</div>
+    
+    <div class="info">Card Number: <span class="info-span">{{ cardNumber }}</span></div>
+    <div class="info">Bank: <span class="info-span">{{ bankInfo }}</span></div>
+    <div class="info">Cardholder Name: <span class="info-span">{{ holderName }}</span></div>
+    <div class="info">Expiration Date: <span class="info-span">{{ expirationDate }}</span></div>
+
+    <div class="message">Please note that this card is now linked to your account and can be used for registering future transactions on our platform. If you did not authorize this card registration, please contact our support team immediately at {{ custContactEmailId }}.</div>
+    <div class="message">Thank you for choosing Wallet watcher. We appreciate your continued trust and support.</div>
+
+    <div class="from-reg">Best regards,</div>
+    <div class="from">Team Wallet watcher</div>
+</body>
+</html>
