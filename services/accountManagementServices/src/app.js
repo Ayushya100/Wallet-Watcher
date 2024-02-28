@@ -60,7 +60,7 @@ app.put(`${USERS_API}/reset-password/:userId`, userRoutes.resetPassword);
 // User Card Routes
 app.post(`${USERS_API}/:userId/register-card`, verifyToken(tokenKey), cardRoutes.registerCard);
 app.get(`${USERS_API}/:userId/get-card-info`, verifyToken(tokenKey), cardRoutes.getCardInfo);
-app.get(`${USERS_API}/:userId/get-card-info/:id`, verifyToken(tokenKey), cardRoutes.getCardInfo);
+app.get(`${USERS_API}/:userId/get-card-info/:cardToken`, verifyToken(tokenKey), cardRoutes.getCardInfo);
 app.put(`${USERS_API}/:userId/update-card-info/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.updateCardInfo);
 app.put(`${USERS_API}/:userId/deactivate-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.deactivateCard);
 app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.reactivateCard);
