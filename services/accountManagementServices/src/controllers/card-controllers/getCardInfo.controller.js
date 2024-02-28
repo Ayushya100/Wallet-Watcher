@@ -1,6 +1,7 @@
 'use strict';
 
 import dbConnect from '../../db/index.js';
+import { decryptData } from '../../utils/index.js';
 
 const getAllCardsInfo = async(userId) => {
     try {
@@ -29,9 +30,20 @@ const getAllCardsInfo = async(userId) => {
     }
 }
 
-const getCardByIdInfo = async(userId, cardId) => {
+const getCardInfoByToken = async(userId, cardToken) => {
     try {
-        const oneCardInfo = await dbConnect.getCardInfoById(userId, cardId);
+        let oneCardInfo = await dbConnect.getCardInfoById(userId, cardToken);
+
+        oneCardInfo.cardType = decryptData(oneCardInfo.cardType);
+        oneCardInfo.bankInfo = decryptData(oneCardInfo.bankInfo);
+        oneCardInfo.expirationDate = decryptData(oneCardInfo.expirationDate);
+        oneCardInfo.holderName = decryptData(oneCardInfo.holderName);
+
+        const date = new Date(oneCardInfo.expirationDate);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = String(date.getFullYear());
+        oneCardInfo.expirationDate = `${year}-${month}`;
 
         if (oneCardInfo) {
             return {
@@ -58,5 +70,5 @@ const getCardByIdInfo = async(userId, cardId) => {
 
 export {
     getAllCardsInfo,
-    getCardByIdInfo
+    getCardInfoByToken
 };

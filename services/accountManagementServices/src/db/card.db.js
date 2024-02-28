@@ -36,15 +36,15 @@ const getAllCardInfo = async(userId) => {
             isDeleted: false
         }
     ).select(
-        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+        'token cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
     );
     return cardInfo;
 }
 
-const getCardInfoById = async(userId, cardId) => {
+const getCardInfoById = async(userId, cardToken) => {
     const cardInfo = await Card.findOne(
         {
-            _id: cardId,
+            token: cardToken,
             userId: userId,
             isDeleted: false
         }

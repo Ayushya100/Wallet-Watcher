@@ -7,10 +7,10 @@ import cardServices from '../../controllers/card-controllers/index.js';
 const getCardInfo = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
         
-        if (cardId) {
-            const getOneCardInfo = await cardServices.getCardByIdInfo(userId, cardId);
+        if (cardToken) {
+            const getOneCardInfo = await cardServices.getCardInfoByToken(userId, cardToken);
 
             if (getOneCardInfo.isValid) {
                 res.status(responseCodes[getOneCardInfo.resType]).json(
