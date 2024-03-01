@@ -54,17 +54,16 @@ const getCardInfoById = async(userId, cardToken) => {
     return cardInfo;
 }
 
-const updateExistingCard = async(userId, cardId, payload) => {
-    const existingCardInfo = await getCardInfoById(userId, cardId);
-    const updatedCardInfo = await Card.findByIdAndUpdate(
+const updateExistingCard = async(userId, cardToken, payload) => {
+    const existingCardInfo = await getCardInfoById(userId, cardToken);
+    const updatedCardInfo = await Card.findOneAndUpdate(
         {
-            _id: cardId,
+            token: cardToken,
             userId: userId,
             isDeleted: false
         },
         {
             $set: {
-                expirationDate: payload.expirationDate || existingCardInfo.expirationDate,
                 holderName: payload.holderName || existingCardInfo.holderName,
                 cardColor: payload.cardColor || existingCardInfo.cardColor,
                 modifiedOn: Date.now(),

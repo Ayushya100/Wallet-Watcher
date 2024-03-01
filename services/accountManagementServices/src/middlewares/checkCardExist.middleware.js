@@ -5,9 +5,9 @@ import dbConnect from '../db/index.js';
 const checkCardExist = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
 
-        const isCardAvailable = await dbConnect.getCardInfoById(userId, cardId);
+        const isCardAvailable = await dbConnect.getCardInfoById(userId, cardToken);
 
         if (!isCardAvailable) {
             next({

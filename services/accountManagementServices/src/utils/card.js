@@ -40,9 +40,20 @@ const decryptData = (encryptedData) => {
     return decryptedData;
 }
 
+const convertDateToString = (encryptedDate) => {
+    const date = new Date(encryptedDate);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear());
+    const finalDate = `${year}-${month}`;
+
+    return finalDate;
+}
+
 export {
     maskCardNumber,
     generateToken,
     encryptData,
-    decryptData
+    decryptData,
+    convertDateToString
 };

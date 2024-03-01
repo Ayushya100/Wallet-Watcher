@@ -57,12 +57,10 @@ const validateUpdateCardPayload = (payload) => {
         isValid: true
     };
 
-    if (payload.expirationDate) {
-        if (!validateExpiryDate(payload.expirationDate)) {
-            response.resType = 'BAD_REQUEST';
-            response.resMsg = `Expiration Date must be greater than today's date`;
-            response.isValid = false;
-        }
+    if (!payload.holderName) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = `Holder name cannot be empty`;
+        response.isValid = false;
     }
     return response;
 }

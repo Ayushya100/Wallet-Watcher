@@ -1,7 +1,7 @@
 'use strict';
 
 import dbConnect from '../../db/index.js';
-import { decryptData } from '../../utils/index.js';
+import { decryptData, convertDateToString } from '../../utils/index.js';
 
 const getAllCardsInfo = async(userId) => {
     try {
@@ -39,11 +39,7 @@ const getCardInfoByToken = async(userId, cardToken) => {
         oneCardInfo.expirationDate = decryptData(oneCardInfo.expirationDate);
         oneCardInfo.holderName = decryptData(oneCardInfo.holderName);
 
-        const date = new Date(oneCardInfo.expirationDate);
-        const day = String(date.getDate()).padStart(2, '0');
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const year = String(date.getFullYear());
-        oneCardInfo.expirationDate = `${year}-${month}`;
+        oneCardInfo.expirationDate = convertDateToString(oneCardInfo.expirationDate);
 
         if (oneCardInfo) {
             return {

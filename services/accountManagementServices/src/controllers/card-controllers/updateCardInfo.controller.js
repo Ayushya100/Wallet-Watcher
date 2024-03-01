@@ -1,19 +1,39 @@
 'use strict';
 
 import dbConnect from '../../db/index.js';
+import emailServices from '../../email/index.js';
+import { encryptData, decryptData, convertDateToString } from '../../utils/card.js';
 
-const updateCardinfo = async(userId, cardId, payload) => {
+const updateCardinfo = async(userId, cardToken, payload) => {
     try {
-        const [year, month] = payload.expirationDate.split('-').map(Number);
-        const lastDateOfMonth = new Date(year, month, 0);
-        lastDateOfMonth.setHours(23, 59, 59, 999);
-        payload.expirationDate = lastDateOfMonth;
+        payload.holderName = encryptData(String(payload.holderName));
 
-        const updatedCardInfo = await dbConnect.updateExistingCard(userId, cardId, payload);
+        let updatedCardInfo = await dbConnect.updateExistingCard(userId, cardToken, payload);
+        updatedCardInfo.holderName = decryptData(updatedCardInfo.holderName);
+        updatedCardInfo.expirationDate = decryptData(updatedCardInfo.expirationDate);
+
+        const expirationDate = convertDateToString(updatedCardInfo.expirationDate);
+        const userInfo = await dbConnect.isUserByIdAvailable(userId);
+
+        const emailPayload = {
+            fullName: userInfo.firstName + ' ' + userInfo.lastName,
+            emailId: userInfo.emailId,
+            cardNumber: updatedCardInfo.cardNumber,
+            expirationDate: expirationDate,
+            holderName: updatedCardInfo.holderName
+        };
+        emailServices.sendCardUpdatedMail(emailPayload);
+        
         return {
             resType: 'REQUEST_COMPLETED',
             resMsg: 'Card Info Updated',
-            data: updatedCardInfo,
+            data: {
+                cardNumber: updatedCardInfo.cardNumber,
+                holderName: updatedCardInfo.holderName,
+                cardColor: updatedCardInfo.cardColor,
+                balance: updatedCardInfo.balance,
+                isActive: updatedCardInfo.isActive
+            },
             isValid: true
         };
     } catch (err) {

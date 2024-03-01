@@ -7,14 +7,14 @@ import cardServices from '../../controllers/card-controllers/index.js';
 const updateCardInfo = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
         const payload = req.body;
 
         // Validate Payload
         const isValidPayload = cardServices.validateUpdateCardPayload(payload);
 
         if (isValidPayload.isValid) {
-            const isCardDetailsUpdated = await cardServices.updateCardinfo(userId, cardId, payload);
+            const isCardDetailsUpdated = await cardServices.updateCardinfo(userId, cardToken, payload);
 
             if (isCardDetailsUpdated.isValid) {
                 res.status(responseCodes[isCardDetailsUpdated.resType]).json(

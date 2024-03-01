@@ -5,7 +5,8 @@ import {
     maskCardNumber,
     generateToken,
     encryptData,
-    decryptData
+    decryptData,
+    convertDateToString
 } from './card.js';
 
 export {
@@ -14,5 +15,6 @@ export {
     maskCardNumber,
     generateToken,
     encryptData,
-    decryptData
+    decryptData,
+    convertDateToString
 };
