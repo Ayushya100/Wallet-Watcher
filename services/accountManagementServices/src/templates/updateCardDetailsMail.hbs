@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation: New Card Registration</title>
+
+    <style>
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .message-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        .info {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-span {
+            font-weight: normal;
+        }
+        .from-reg {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 2px;
+        }
+        .from {
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+    <div class="username">Dear {{ fullName }},</div>
+    <div class="message">We are writing to inform you that the details of your existing card on file have been successfully updated in our system. This ensures that your payment information remains accurate and up-to-date for all transactions conducted on Wallet watcher.</div>
+    <div class="message">Here are the updated card details:</div>
+    
+    <div class="info">Card Number: <span class="info-span">{{ cardNumber }}</span></div>
+    <div class="info">Cardholder Name: <span class="info-span">{{ holderName }}</span></div>
+    <div class="info">Expiration Date: <span class="info-span">{{ expirationDate }}</span></div>
+
+    <div class="message">Your account is now updated with the new information, and you can continue to enjoy seamless transactions without any interruptions. If you have any questions or concerns regarding this update, please don't hesitate to contact our support team at {{ custContactEmailId }}.</div>
+    <div class="message">Thank you for keeping your information current. We appreciate your continued trust in Wallet watcher.</div>
+
+    <div class="from-reg">Best regards,</div>
+    <div class="from">Team Wallet watcher</div>
+</body>
+</html>

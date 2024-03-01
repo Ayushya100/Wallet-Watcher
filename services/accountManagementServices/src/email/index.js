@@ -11,7 +11,8 @@ import {
   requestPasswordResetMail
 } from './userMails.js';
 import { 
-  sendCardRegistrationMail
+  sendCardRegistrationMail,
+  sendCardUpdatedMail
 } from './cardMails.js';
 
 export default {
@@ -23,5 +24,6 @@ export default {
   passwordUpdatedSuccessfullMail,
   accountDeactivatedMail,
   requestPasswordResetMail,
-  sendCardRegistrationMail
+  sendCardRegistrationMail,
+  sendCardUpdatedMail
 };

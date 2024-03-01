@@ -21,6 +21,24 @@ const sendCardRegistrationMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const sendCardUpdatedMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Update: Card Details Successfully Updated',
+        template: 'updateCardDetailsMail',
+        context: {
+            fullName: payload.fullName,
+            cardNumber: payload.cardNumber,
+            expirationDate: payload.expirationDate,
+            holderName: payload.holderName
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
-    sendCardRegistrationMail
+    sendCardRegistrationMail,
+    sendCardUpdatedMail
 };
