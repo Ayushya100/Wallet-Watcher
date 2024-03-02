@@ -1,15 +1,33 @@
 'use strict';
 
 import dbConnect from '../../db/index.js';
+import emailServices from '../../email/index.js';
+import { decryptData } from '../../utils/card.js';
 
-const deactivateCard = async(userId, cardId) => {
+const deactivateCard = async(userId, cardToken) => {
     try {
-        const updatedCardInfo = await dbConnect.deactivateCard(userId, cardId);
+        const updatedCardInfo = await dbConnect.deactivateCard(userId, cardToken);
+        updatedCardInfo.holderName = decryptData(updatedCardInfo.holderName);
+        updatedCardInfo.expirationDate = decryptData(updatedCardInfo.expirationDate);
+
+        const userInfo = await dbConnect.isUserByIdAvailable(userId);
+
+        const emailPayload = {
+            fullName: userInfo.firstName + ' ' + userInfo.lastName,
+            emailId: userInfo.emailId,
+            cardNumber: updatedCardInfo.cardNumber
+        };
+        emailServices.sendCardDeactivatedMail(emailPayload);
 
         return {
             resType: 'REQUEST_COMPLETED',
             resMsg: 'Card Deactivated Successfully',
-            data: updatedCardInfo,
+            data: {
+                cardNumber: updatedCardInfo.cardNumber,
+                holderName: updatedCardInfo.holderName,
+                cardColor: updatedCardInfo.cardColor,
+                isActive: updatedCardInfo.isActive
+            },
             isValid: true
         };
     } catch (err) {

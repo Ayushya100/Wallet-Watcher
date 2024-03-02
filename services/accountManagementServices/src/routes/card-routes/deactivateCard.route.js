@@ -7,20 +7,29 @@ import cardServices from '../../controllers/card-controllers/index.js';
 const deactivateCard = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
+        const cardDetails = req.cardDetails;
 
-        const isCardDeactivated = await cardServices.deactivateCard(userId, cardId);
-
-        if (isCardDeactivated.isValid) {
-            res.status(responseCodes[isCardDeactivated.resType]).json(
-                new ApiResponse(
-                    responseCodes[isCardDeactivated.resType],
-                    isCardDeactivated.data,
-                    isCardDeactivated.resMsg + ' - ' + responseMessage[isCardDeactivated.resType]
-                )
-            );
+        if (cardDetails.isActive) {
+            const isCardDeactivated = await cardServices.deactivateCard(userId, cardToken);
+    
+            if (isCardDeactivated.isValid) {
+                res.status(responseCodes[isCardDeactivated.resType]).json(
+                    new ApiResponse(
+                        responseCodes[isCardDeactivated.resType],
+                        isCardDeactivated.data,
+                        isCardDeactivated.resMsg + ' - ' + responseMessage[isCardDeactivated.resType]
+                    )
+                );
+            } else {
+                return next(isCardDeactivated);
+            }
         } else {
-            return next(isCardDeactivated);
+            return next({
+                resType: 'BAD_REQUEST',
+                resMsg: 'Already Deactive Card',
+                isValid: false
+            });
         }
     } catch (err) {
         next({

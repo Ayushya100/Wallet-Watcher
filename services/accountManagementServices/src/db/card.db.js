@@ -49,7 +49,7 @@ const getCardInfoById = async(userId, cardToken) => {
             isDeleted: false
         }
     ).select(
-        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive balance'
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive balance isDeleted'
     );
     return cardInfo;
 }
@@ -79,10 +79,10 @@ const updateExistingCard = async(userId, cardToken, payload) => {
     return updatedCardInfo;
 }
 
-const deactivateCard = async(userId, cardId) => {
-    const updatedCardInfo = await Card.findByIdAndUpdate(
+const deactivateCard = async(userId, cardToken) => {
+    const updatedCardInfo = await Card.findOneAndUpdate(
         {
-            _id: cardId,
+            token: cardToken,
             userId: userId
         },
         {
