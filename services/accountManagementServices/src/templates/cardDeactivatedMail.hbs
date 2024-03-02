@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation: New Card Registration</title>
+
+    <style>
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .message-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        .info {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-span {
+            font-weight: normal;
+        }
+        .from-reg {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 2px;
+        }
+        .from {
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+    <div class="username">Dear {{ fullName }},</div>
+    <div class="message">We want to inform you that the card deactivation request for your account on Wallet watcher has been successfully processed. Your card {{ cardNumber }} has been deactivated and can no longer be used for payments or transactions on our platform.</div>
+
+    <div class="message">This action has been taken in accordance with your request to deactivate the card associated with your account. If you did not initiate this request, or if you believe this deactivation was made in error, please contact our support team immediately at {{ custContactEmailId }}.</div>
+    <div class="message">Rest assured, your account security is our top priority, and we are committed to ensuring the integrity of your payment information. If you require assistance with adding a new card or have any questions about your account, please feel free to reach out to us.</div>
+    <div class="message">Thank you for your cooperation and understanding in this matter. We appreciate your continued trust and support in Wallet watcher</div>
+
+    <div class="from-reg">Best regards,</div>
+    <div class="from">Team Wallet watcher</div>
+</body>
+</html>

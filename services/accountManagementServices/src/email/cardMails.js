@@ -31,7 +31,24 @@ const sendCardUpdatedMail = (payload) => {
             fullName: payload.fullName,
             cardNumber: payload.cardNumber,
             expirationDate: payload.expirationDate,
-            holderName: payload.holderName
+            holderName: payload.holderName,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
+const sendCardDeactivatedMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Confirmation: Card Deactivation Request Processed',
+        template: 'cardDeactivatedMail',
+        context: {
+            fullName: payload.fullName,
+            cardNumber: payload.cardNumber,
+            custContactEmailId: process.env.EMAIL_USER
         }
     };
 
@@ -40,5 +57,6 @@ const sendCardUpdatedMail = (payload) => {
 
 export {
     sendCardRegistrationMail,
-    sendCardUpdatedMail
+    sendCardUpdatedMail,
+    sendCardDeactivatedMail
 };
