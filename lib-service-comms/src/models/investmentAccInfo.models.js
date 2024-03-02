@@ -8,17 +8,22 @@ const investmentAccInfoModel = (mongoose) => {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
             },
+            token: {
+                type: String,
+                unique: true,
+                required: true
+            },
             accountName: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
             },
             accountNumber: {
                 type: String,
                 required: true
             },
             accountDate: {
-                type: Date,
-                default: Date.now(),
+                type: String,
                 required: true
             },
             holderName: {
