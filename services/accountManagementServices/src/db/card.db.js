@@ -41,7 +41,7 @@ const getAllCardInfo = async(userId) => {
     return cardInfo;
 }
 
-const getCardInfoById = async(userId, cardToken) => {
+const getCardInfoByToken = async(userId, cardToken) => {
     const cardInfo = await Card.findOne(
         {
             token: cardToken,
@@ -55,7 +55,7 @@ const getCardInfoById = async(userId, cardToken) => {
 }
 
 const updateExistingCard = async(userId, cardToken, payload) => {
-    const existingCardInfo = await getCardInfoById(userId, cardToken);
+    const existingCardInfo = await getCardInfoByToken(userId, cardToken);
     const updatedCardInfo = await Card.findOneAndUpdate(
         {
             token: cardToken,
@@ -123,10 +123,10 @@ const reactivateCard = async(userId, cardToken) => {
     return updatedCardInfo;
 }
 
-const deleteCard = async(userId, cardId) => {
-    const updatedCardInfo = await Card.findByIdAndUpdate(
+const deleteCard = async(userId, cardToken) => {
+    const updatedCardInfo = await Card.findOneAndUpdate(
         {
-            _id: cardId,
+            token: cardToken,
             userId: userId
         },
         {
@@ -141,7 +141,7 @@ const deleteCard = async(userId, cardId) => {
             new: true
         }
     ).select(
-        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive'
+        'cardNumber cardType bankInfo expirationDate holderName cardColor isActive isDeleted'
     );
     return updatedCardInfo;
 }
@@ -150,7 +150,7 @@ export {
     isCardByCardNumberAvailable,
     createNewCard,
     getAllCardInfo,
-    getCardInfoById,
+    getCardInfoByToken,
     updateExistingCard,
     deactivateCard,
     reactivateCard,

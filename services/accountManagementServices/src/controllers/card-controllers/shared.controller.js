@@ -4,7 +4,7 @@ import dbConnect from '../../db/index.js';
 
 const isCardByIdExist = async(userId, cardId) => {
     try {
-        const isCardAvailable = await dbConnect.getCardInfoById(userId, cardId);
+        const isCardAvailable = await dbConnect.getCardInfoByToken(userId, cardId);
 
         if (isCardAvailable) {
             return {

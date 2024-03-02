@@ -7,9 +7,9 @@ import cardServices from '../../controllers/card-controllers/index.js';
 const deleteCard = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
 
-        const isCardDeleted = await cardServices.deleteCard(userId, cardId);
+        const isCardDeleted = await cardServices.deleteCard(userId, cardToken);
 
         if (isCardDeleted.isValid) {
             res.status(responseCodes[isCardDeleted.resType]).json(

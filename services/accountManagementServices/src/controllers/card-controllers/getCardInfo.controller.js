@@ -32,7 +32,7 @@ const getAllCardsInfo = async(userId) => {
 
 const getCardInfoByToken = async(userId, cardToken) => {
     try {
-        let oneCardInfo = await dbConnect.getCardInfoById(userId, cardToken);
+        let oneCardInfo = await dbConnect.getCardInfoByToken(userId, cardToken);
 
         oneCardInfo.cardType = decryptData(oneCardInfo.cardType);
         oneCardInfo.bankInfo = decryptData(oneCardInfo.bankInfo);
