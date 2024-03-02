@@ -17,6 +17,7 @@ const isAccountByAccNumberAvailable = async(accountNumber) => {
 const createAccount = async(userId, payload) => {
     const newAccount = await Account.create({
         userId: userId,
+        token: payload.token,
         accountName: payload.accountName,
         accountNumber: payload.accountNumber,
         accountDate: payload.accountDate,
