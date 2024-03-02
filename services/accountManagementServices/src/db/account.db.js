@@ -34,15 +34,15 @@ const getAllAccountInfo = async(userId) => {
             isDeleted: false
         }
     ).select(
-        'accountName accountNumber accountDate holderName isActive'
+        'token accountName accountNumber accountDate holderName isActive'
     );
     return accountInfo;
 }
 
-const getAccountById = async(userId, accountId) => {
+const getAccountByToken = async(userId, accountToken) => {
     const accountInfo = await Account.findOne(
         {
-            _id: accountId,
+            token: accountToken,
             userId: userId,
             isDeleted: false
         }
@@ -148,7 +148,7 @@ export {
     isAccountByAccNumberAvailable,
     createAccount,
     getAllAccountInfo,
-    getAccountById,
+    getAccountByToken,
     updateExistingAccount,
     deactivateAccount,
     reactivateAccount,

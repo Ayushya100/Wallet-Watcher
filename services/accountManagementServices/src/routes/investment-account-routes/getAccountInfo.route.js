@@ -7,10 +7,10 @@ import accountServices from '../../controllers/investment-account-controllers/in
 const getAccountInfo = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const accountId = req.params.id;
+        const accountToken = req.params.accountToken;
 
-        if (accountId) {
-            const getOneAccountInfo = await accountServices.getAccountInfoById(userId, accountId);
+        if (accountToken) {
+            const getOneAccountInfo = await accountServices.getAccountInfoByToken(userId, accountToken);
 
             if (getOneAccountInfo.isValid) {
                 res.status(responseCodes[getOneAccountInfo.resType]).json(

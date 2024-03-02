@@ -2,7 +2,7 @@
 
 import { validateNewAccountPayload, validateUpdateAccountPayload } from './validatePayload.controller.js';
 import { checkAccountByAccNumber, createAccount } from './createAccount.controller.js';
-import { getAllAccountInfo, getAccountInfoById } from './getAccountInfo.controller.js';
+import { getAllAccountInfo, getAccountInfoByToken } from './getAccountInfo.controller.js';
 import { updateAccountInfo } from './updateAccountInfo.controller.js';
 import { isAccountByIdExist } from './shared.controller.js';
 import { deactivateAccount } from './deactivateAccount.controller.js';
@@ -16,7 +16,7 @@ export default {
     checkAccountByAccNumber,
     createAccount,
     getAllAccountInfo,
-    getAccountInfoById,
+    getAccountInfoByToken,
     updateAccountInfo,
     isAccountByIdExist,
     deactivateAccount,

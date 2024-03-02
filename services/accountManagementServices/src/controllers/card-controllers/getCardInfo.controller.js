@@ -7,6 +7,14 @@ const getAllCardsInfo = async(userId) => {
     try {
         const allCardInfo = await dbConnect.getAllCardInfo(userId);
 
+        for (const cardInfo of allCardInfo) {
+            cardInfo.cardType = decryptData(String(cardInfo.cardType));
+            cardInfo.bankInfo = decryptData(String(cardInfo.bankInfo));
+            cardInfo.holderName = decryptData(String(cardInfo.holderName));
+            cardInfo.expirationDate = decryptData(String(cardInfo.expirationDate));
+            cardInfo.expirationDate = convertDateToString(cardInfo.expirationDate);
+        }
+
         if (allCardInfo.length > 0) {
             return {
                 resType: 'REQUEST_ACCEPTED',
