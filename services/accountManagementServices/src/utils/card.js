@@ -40,12 +40,24 @@ const decryptData = (encryptedData) => {
     return decryptedData;
 }
 
-const convertDateToString = (encryptedDate) => {
+const getConvertedDate = (encryptedDate) => {
     const date = new Date(encryptedDate);
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = String(date.getFullYear());
-    const finalDate = `${year}-${month}`;
+    return {day, month, year};
+}
+
+const convertDateToString = (encryptedDate) => {
+    const date = getConvertedDate(encryptedDate);
+    const finalDate = `${date.year}-${date.month}`;
+
+    return finalDate;
+}
+
+const convertFullDateToString = (encryptedDate) => {
+    const date = getConvertedDate(encryptedDate);
+    const finalDate = `${date.year}-${date.month}-${date.day}`;
 
     return finalDate;
 }
@@ -55,5 +67,6 @@ export {
     generateToken,
     encryptData,
     decryptData,
-    convertDateToString
+    convertDateToString,
+    convertFullDateToString
 };

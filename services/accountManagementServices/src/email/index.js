@@ -13,7 +13,8 @@ import {
 import { 
   sendCardRegistrationMail,
   sendCardUpdatedMail,
-  sendCardDeactivatedMail
+  sendCardDeactivatedMail,
+  sendCardReactivationMail
 } from './cardMails.js';
 
 export default {
@@ -27,5 +28,6 @@ export default {
   requestPasswordResetMail,
   sendCardRegistrationMail,
   sendCardUpdatedMail,
-  sendCardDeactivatedMail
+  sendCardDeactivatedMail,
+  sendCardReactivationMail
 };

@@ -63,7 +63,7 @@ app.get(`${USERS_API}/:userId/get-card-info`, verifyToken(tokenKey), cardRoutes.
 app.get(`${USERS_API}/:userId/get-card-info/:cardToken`, verifyToken(tokenKey), cardRoutes.getCardInfo);
 app.put(`${USERS_API}/:userId/update-card-info/:cardToken`, verifyToken(tokenKey), checkCardExist, cardRoutes.updateCardInfo);
 app.put(`${USERS_API}/:userId/deactivate-card/:cardToken`, verifyToken(tokenKey), checkCardExist, cardRoutes.deactivateCard);
-app.put(`${USERS_API}/:userId/reactivate-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.reactivateCard);
+app.put(`${USERS_API}/:userId/reactivate-card/:cardToken`, verifyToken(tokenKey), checkCardExist, cardRoutes.reactivateCard);
 app.delete(`${USERS_API}/:userId/delete-card/:id`, verifyToken(tokenKey), checkCardExist, cardRoutes.deleteCard);
 app.get(`${USERS_API}/generate-card-number`, verifyToken(tokenKey), cardRoutes.generateCardNumber);
 

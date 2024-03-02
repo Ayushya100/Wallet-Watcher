@@ -101,10 +101,10 @@ const deactivateCard = async(userId, cardToken) => {
     return updatedCardInfo;
 }
 
-const reactivateCard = async(userId, cardId) => {
-    const updatedCardInfo = await Card.findByIdAndUpdate(
+const reactivateCard = async(userId, cardToken) => {
+    const updatedCardInfo = await Card.findOneAndUpdate(
         {
-            _id: cardId,
+            token: cardToken,
             userId: userId
         },
         {
