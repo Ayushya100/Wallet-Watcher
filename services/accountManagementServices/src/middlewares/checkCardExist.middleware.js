@@ -7,7 +7,7 @@ const checkCardExist = async(req, res, next) => {
         const userId = req.params.userId;
         const cardToken = req.params.cardToken;
 
-        const isCardAvailable = await dbConnect.getCardInfoById(userId, cardToken);
+        const isCardAvailable = await dbConnect.getCardInfoByToken(userId, cardToken);
         req.cardDetails = isCardAvailable;
 
         if (!isCardAvailable) {
