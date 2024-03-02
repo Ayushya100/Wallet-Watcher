@@ -18,9 +18,9 @@ const generateToken = (cardNumber, byteSize = 16) => {
 }
 
 const encryptData = (data) => {
-    const method = process.env.ENCRYPTION_METHOD;
-    const encryptionKey = process.env.ENCRYPTION_KEY;
-    const iv = process.env.ENCRYPTION_INITIALIZATION;
+    const method = process.env.CARD_ENCRYPTION_METHOD;
+    const encryptionKey = process.env.CARD_ENCRYPTION_KEY;
+    const iv = process.env.CARD_ENCRYPTION_INITIALIZATION;
 
     const cipher = crypto.createCipheriv(method, Buffer.from(encryptionKey, 'hex'), Buffer.from(iv, 'hex'));
     let encryptedData = cipher.update(data, 'utf8', 'hex');
@@ -30,8 +30,8 @@ const encryptData = (data) => {
 }
 
 const decryptData = (encryptedData) => {
-    const method = process.env.ENCRYPTION_METHOD;
-    const encryptionKey = process.env.ENCRYPTION_KEY;
+    const method = process.env.CARD_ENCRYPTION_METHOD;
+    const encryptionKey = process.env.CARD_ENCRYPTION_KEY;
 
     const [iv, encryptedText] = encryptedData.split(':');
     const decipher = crypto.createDecipheriv(method, Buffer.from(encryptionKey, 'hex'), Buffer.from(iv, 'hex'));
