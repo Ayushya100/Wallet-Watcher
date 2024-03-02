@@ -7,18 +7,16 @@ import cardServices from '../../controllers/card-controllers/index.js';
 const reactivateCard = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const cardId = req.params.id;
+        const cardToken = req.params.cardToken;
+        const cardDetails = req.cardDetails;
 
-        // Check if card exist
-        const isCardAvailable = await cardServices.isCardByIdExist(userId, cardId);
-
-        if (isCardAvailable.isValid) {
+        if (!cardDetails.isActive) {
             // Check if card already expired
-            const isCardValidToReactivate = cardServices.isCardValidToReactivate(isCardAvailable);
-
+            const isCardValidToReactivate = cardServices.isCardValidToReactivate(cardDetails);
+    
             if (isCardValidToReactivate.isValid) {
-                const isCardReactivated = await cardServices.reactivateCard(userId, cardId);
-
+                const isCardReactivated = await cardServices.reactivateCard(userId, cardToken);
+    
                 if (isCardReactivated.isValid) {
                     res.status(responseCodes[isCardReactivated.resType]).json(
                         new ApiResponse(
@@ -34,7 +32,11 @@ const reactivateCard = async(req, res, next) => {
                 return next(isCardValidToReactivate);
             }
         } else {
-            return next(isCardAvailable);
+            return next({
+                resType: 'BAD_REQUEST',
+                resMsg: 'Already Active Card',
+                isValid: false
+            });
         }
     } catch (err) {
         next({

@@ -55,8 +55,25 @@ const sendCardDeactivatedMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const sendCardReactivationMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Confirmation: Card Reactivation Request Processed',
+        template: 'cardReactivatedMail',
+        context: {
+            fullName: payload.fullName,
+            cardNumber: payload.cardNumber,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
     sendCardRegistrationMail,
     sendCardUpdatedMail,
-    sendCardDeactivatedMail
+    sendCardDeactivatedMail,
+    sendCardReactivationMail
 };

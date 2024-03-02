@@ -6,7 +6,8 @@ import {
     generateToken,
     encryptData,
     decryptData,
-    convertDateToString
+    convertDateToString,
+    convertFullDateToString
 } from './card.js';
 
 export {
@@ -16,5 +17,6 @@ export {
     generateToken,
     encryptData,
     decryptData,
-    convertDateToString
+    convertDateToString,
+    convertFullDateToString
 };
