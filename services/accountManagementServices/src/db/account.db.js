@@ -99,10 +99,10 @@ const deactivateAccount = async(userId, accountToken) => {
     return updatedAccountInfo;
 }
 
-const reactivateAccount = async(userId, accountId) => {
-    const updatedAccountInfo = await Account.findByIdAndUpdate(
+const reactivateAccount = async(userId, accountToken) => {
+    const updatedAccountInfo = await Account.findOneAndUpdate(
         {
-            _id: accountId,
+            token: accountToken,
             userId: userId
         },
         {

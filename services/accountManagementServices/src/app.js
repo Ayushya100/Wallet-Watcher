@@ -73,7 +73,7 @@ app.get(`${USERS_API}/:userId/get-account-info`, verifyToken(tokenKey), accountR
 app.get(`${USERS_API}/:userId/get-account-info/:accountToken`, verifyToken(tokenKey), accountRoutes.getAccountInfo);
 app.put(`${USERS_API}/:userId/update-account-info/:accountToken`, verifyToken(tokenKey), checkAccountExist, accountRoutes.updateAccountInfo);
 app.put(`${USERS_API}/:userId/deactivate-account/:accountToken`, verifyToken(tokenKey), checkAccountExist, accountRoutes.deactivateAccount);
-app.put(`${USERS_API}/:userId/reactivate-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.reactivateAccount);
+app.put(`${USERS_API}/:userId/reactivate-account/:accountToken`, verifyToken(tokenKey), checkAccountExist, accountRoutes.reactivateAccount);
 app.delete(`${USERS_API}/:userId/delete-account/:id`, verifyToken(tokenKey), checkAccountExist, accountRoutes.deleteAccount);
 app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRoutes.generateAccountNumber);
 
