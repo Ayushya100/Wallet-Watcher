@@ -21,6 +21,25 @@ const sendAccountRegistrationMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const sendAccountUpdatedMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Update: Investment Account Details Successfully Updated',
+        template: 'updateAccountDetailsMail',
+        context: {
+            fullName: payload.fullName,
+            accountNumber: payload.accountNumber,
+            holderName: payload.holderName,
+            accountDate: payload.accountDate,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
-    sendAccountRegistrationMail
+    sendAccountRegistrationMail,
+    sendAccountUpdatedMail
 };

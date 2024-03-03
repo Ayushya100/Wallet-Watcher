@@ -7,14 +7,14 @@ import accountServices from '../../controllers/investment-account-controllers/in
 const updateAccountInfo = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const accountId = req.params.id;
+        const accountToken = req.params.accountToken;
         const payload = req.body;
 
         // Validate Payload
         const isValidPayload = accountServices.validateUpdateAccountPayload(payload); 
 
         if (isValidPayload.isValid) {
-            const isAccountDetailsUpdated = await accountServices.updateAccountInfo(userId, accountId, payload);
+            const isAccountDetailsUpdated = await accountServices.updateAccountInfo(userId, accountToken, payload);
     
             if (isAccountDetailsUpdated.isValid) {
                 res.status(responseCodes[isAccountDetailsUpdated.resType]).json(

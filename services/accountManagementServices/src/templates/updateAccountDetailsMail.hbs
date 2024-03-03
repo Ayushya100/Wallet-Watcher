@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation: New Card Registration</title>
+
+    <style>
+        .username {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .message {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .message-heading {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: -10px;
+        }
+        .info {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .info-span {
+            font-weight: normal;
+        }
+        .from-reg {
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 2px;
+        }
+        .from {
+            font-size: 16px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>    
+    <div class="username">Dear {{ fullName }},</div>
+    <div class="message">We're writing to inform you that the details of your investment account with Wallet watcher have been successfully updated. Ensuring that your account information is accurate and up-to-date is crucial for effective investment management, and we're pleased to assist you with this process.</div>
+    <div class="message">Here are the updated account details:</div>
+    
+    <div class="info">Account Number: <span class="info-span">{{ accountNumber }}</span></div>
+    <div class="info">Account Holder Name: <span class="info-span">{{ holderName }}</span></div>
+    <div class="info">Account opening Date: <span class="info-span">{{ accountDate }}</span></div>
+
+    <div class="message">Your account is now updated with the new information, ensuring that you receive important communications and statements promptly. If you have any questions or concerns regarding this update, please don't hesitate to contact our support team at {{ custContactEmailId }}.</div>
+    <div class="message">Thank you for entrusting us with your investment needs. We're committed to providing you with excellent service and support as you pursue your financial goals.</div>
+
+    <div class="from-reg">Best regards,</div>
+    <div class="from">Team Wallet watcher</div>
+</body>
+</html>

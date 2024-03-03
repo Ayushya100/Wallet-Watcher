@@ -5,9 +5,10 @@ import dbConnect from '../db/index.js';
 const checkAccountExist = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const accountId = req.params.id;
+        const accountToken = req.params.accountToken;
 
-        const isAccountAvailable = await dbConnect.getAccountById(userId, accountId);
+        const isAccountAvailable = await dbConnect.getAccountByToken(userId, accountToken);
+        req.accountDetails = isAccountAvailable;
 
         if (!isAccountAvailable) {
             next({
