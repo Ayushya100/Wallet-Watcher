@@ -13,6 +13,7 @@ import userRoutes from './routes/user-routes/index.js';
 import cardRoutes from './routes/card-routes/index.js';
 import accountRoutes from './routes/investment-account-routes/index.js';
 import dashboardRoutes from './routes/user-dashboard-routes/index.js';
+import settingRoutes from './routes/dashboard-setting-routes/index.js';
 
 const app = express();
 
@@ -80,6 +81,9 @@ app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRo
 // User Dashboard Setting Routes
 app.get(`${USERS_API}/:userId/get-dashboard-settings`, verifyToken(tokenKey), dashboardRoutes.getUserDashboardSetting);
 app.put(`${USERS_API}/:userId/update-dashboard-settings/:id`, verifyToken(tokenKey), dashboardRoutes.updateUserDashboardSettings);
+
+// Dashboard Setting Routes
+app.post(`${USERS_API}/create-setting`, settingRoutes.createSetting);
 
 // Error Handler middleware
 app.use(errorHandler);

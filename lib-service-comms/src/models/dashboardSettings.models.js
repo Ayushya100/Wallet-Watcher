@@ -6,10 +6,13 @@ const DashboardSettingsModels = (mongoose) => {
         {
             categoryName: {
                 type: String,
-                required: true,
-                unique: true
+                required: true
             },
             categoryDescription: {
+                type: String,
+                required: true
+            },
+            categoryType: {
                 type: String,
                 required: true
             },
@@ -17,6 +20,16 @@ const DashboardSettingsModels = (mongoose) => {
                 type: String,
                 required: true,
                 default: 'Boolean'
+            },
+            isPeriodic: {
+                type: Boolean,
+                required: true,
+                default: true
+            },
+            duration: {
+                type: String,
+                required: false,
+                default: 'daily'
             },
             createdOn: {
                 type: Date,

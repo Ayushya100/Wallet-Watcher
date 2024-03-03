@@ -5,11 +5,12 @@ import {v4 as uuidv4} from 'uuid';
 import jwt from 'jsonwebtoken';
 
 // Add DB Models
-import { userModel, UserFinanceModel, UserDashboardModel } from 'lib-service-comms';
+import { userModel, UserFinanceModel, UserDashboardModel, DashboardSettingsModels } from 'lib-service-comms';
 
 const User = userModel(mongoose);
 const UserFinance = UserFinanceModel(mongoose);
 const UserDashboard = UserDashboardModel(mongoose);
+const DashboardSettings = DashboardSettingsModels(mongoose);
 
 const isUserByUserNameOrEmailAvailable = async(userName, emailId) => {
     const isUserExist = await User.findOne({
@@ -73,7 +74,7 @@ const createNewUser = async(payload) => {
     });
 
     await UserFinance.create({ userId: newUser._id });
-    await UserDashboard.create({ userId: newUser._id });
+    // await UserDashboard.create({ userId: newUser._id });
 
     const updatedUser = await generateVerificationCode(newUser._id);
     return updatedUser;
@@ -353,6 +354,27 @@ const updateUserDashboardSetting = async(userId, dashboardId, payload) => {
     return updatedDashboardSettings;
 }
 
+const isSettingByNameAvailable = async(payload) => {
+    const settingDetail = await DashboardSettings.findOne({
+        categoryName: payload.categoryName,
+        categoryType: payload.categoryType
+    });
+    return settingDetail;
+}
+
+const createNewSetting = async(payload) => {
+    const newSetting = await DashboardSettings.create({
+        categoryName: payload.categoryName,
+        categoryDescription: payload.categoryDescription,
+        categoryType: payload.categoryType,
+        type: payload.type,
+        isPeriodic: payload.isPeriodic,
+        duration: payload.duration
+    });
+
+    return newSetting;
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
@@ -372,5 +394,7 @@ export {
     userDeactivate,
     updateProfileImage,
     deleteProfileImage,
-    resetUserPassword
+    resetUserPassword,
+    isSettingByNameAvailable,
+    createNewSetting
 };
