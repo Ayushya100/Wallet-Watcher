@@ -357,7 +357,8 @@ const updateUserDashboardSetting = async(userId, dashboardId, payload) => {
 const isSettingByNameAvailable = async(payload) => {
     const settingDetail = await DashboardSettings.findOne({
         categoryName: payload.categoryName,
-        categoryType: payload.categoryType
+        categoryType: payload.categoryType,
+        duration: payload.duration
     });
     return settingDetail;
 }
@@ -373,6 +374,16 @@ const createNewSetting = async(payload) => {
     });
 
     return newSetting;
+}
+
+const getAllSettings = async() => {
+    const settingDetails = await DashboardSettings.find({
+        isDeleted: false
+    }).select(
+        'categoryName categoryDescription categoryType type isPeriodic duration'
+    );
+
+    return settingDetails;
 }
 
 export {
@@ -396,5 +407,6 @@ export {
     deleteProfileImage,
     resetUserPassword,
     isSettingByNameAvailable,
-    createNewSetting
+    createNewSetting,
+    getAllSettings
 };

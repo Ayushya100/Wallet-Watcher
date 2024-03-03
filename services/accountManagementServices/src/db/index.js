@@ -21,7 +21,8 @@ import {
   deleteProfileImage,
   resetUserPassword,
   isSettingByNameAvailable,
-  createNewSetting
+  createNewSetting,
+  getAllSettings
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -64,6 +65,7 @@ export default {
   resetUserPassword,
   isSettingByNameAvailable,
   createNewSetting,
+  getAllSettings,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,
