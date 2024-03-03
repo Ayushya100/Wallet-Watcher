@@ -1,10 +1,24 @@
 'use strict';
 
 import dbConnect from '../../db/index.js';
+import emailServices from '../../email/index.js';
+import { decryptAccountData } from '../../utils/index.js';
 
-const reactivateAccount = async(userId, accountId) => {
+const reactivateAccount = async(userId, accountToken) => {
     try {
-        const updatedAccountInfo = await dbConnect.reactivateAccount(userId, accountId);
+        const updatedAccountInfo = await dbConnect.reactivateAccount(userId, accountToken);
+        updatedAccountInfo.accountName = decryptAccountData(String(updatedAccountInfo.accountName));
+        updatedAccountInfo.accountDate = decryptAccountData(String(updatedAccountInfo.accountDate));
+        updatedAccountInfo.holderName = decryptAccountData(String(updatedAccountInfo.holderName));
+
+        const userInfo = await dbConnect.isUserByIdAvailable(userId);
+
+        const emailPayload = {
+            fullName: userInfo.firstName + ' ' + userInfo.lastName,
+            emailId: userInfo.emailId,
+            accountNumber: updatedAccountInfo.accountNumber
+        };
+        emailServices.sendAccountReactivationMail(emailPayload);
 
         return {
             resType: 'REQUEST_COMPLETED',

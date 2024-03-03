@@ -18,7 +18,7 @@ const deactivateAccount = async(userId, accountToken) => {
             emailId: userInfo.emailId,
             accountNumber: updatedAccountInfo.accountNumber
         };
-        emailServices.sendAccountDeactivatedMail(emailPayload);
+        emailServices.sendAccountDeactivationMail(emailPayload);
 
         return {
             resType: 'REQUEST_COMPLETED',
