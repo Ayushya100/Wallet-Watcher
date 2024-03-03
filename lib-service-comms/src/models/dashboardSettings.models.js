@@ -1,25 +1,22 @@
 'use strict';
 
-const UserDashboardModel = (mongoose) => {
-    // User dashboard Schema
-    const userDashboardSchema = new mongoose.Schema(
+const DashboardSettingsModels = (mongoose) => {
+    // Dashboard Settings Schema
+    const dashboardSchema = new mongoose.Schema(
         {
-            userId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
+            categoryName: {
+                type: String,
+                required: true,
+                unique: true
             },
-            settingId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'DashboardSettings'
+            categoryDescription: {
+                type: String,
+                required: true
             },
             type: {
                 type: String,
                 required: true,
                 default: 'Boolean'
-            },
-            value: {
-                type: String,
-                required: true
             },
             createdOn: {
                 type: Date,
@@ -50,10 +47,10 @@ const UserDashboardModel = (mongoose) => {
             }
         }
     );
-    
-    // User dashboard Model
-    const UserDashboard = mongoose.model('UserDashboard', userDashboardSchema);
-    return UserDashboard;
+
+    // Dashboard Settings Model
+    const DashboardSettings = mongoose.model('DashboardSettings', dashboardSchema);
+    return DashboardSettings;
 }
 
-export default UserDashboardModel;
+export default DashboardSettingsModels;

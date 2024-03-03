@@ -36,6 +36,10 @@ const logsModel = (mongoose) => {
             }
         }
     );
+
+    // Logs Model
+    const Logs = mongoose.model('Logs', logSchema);
+    return Logs
 }
 
 export default logsModel;
