@@ -1,14 +1,18 @@
 'use strict';
 
-const CrdExpCategoryModel = (mongoose) => {
-    // User Credit Card Category Schema
-    const crdExpCatSchema = new mongoose.Schema(
+const UserWalletCategoryModel = (mongoose) => {
+    // User Wallet Category Schema
+    const userWalletCategorySchema = new mongoose.Schema(
         {
             userId: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User'
             },
-            creditCategoryName: {
+            categoryType: {
+                type: String,
+                required: true
+            },
+            categoryName: {
                 type: String,
                 required: true
             },
@@ -43,8 +47,8 @@ const CrdExpCategoryModel = (mongoose) => {
     );
     
     // User Credit Card Model
-    const CrdExpCategory = mongoose.model('CrdExpCategory', crdExpCatSchema);
-    return CrdExpCategory;
+    const UserWalletCategory = mongoose.model('CrdExpCategory', userWalletCategorySchema);
+    return UserWalletCategory;
 }
 
-export default CrdExpCategoryModel;
+export default UserWalletCategoryModel;
