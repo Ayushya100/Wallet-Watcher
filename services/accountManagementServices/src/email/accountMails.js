@@ -39,7 +39,24 @@ const sendAccountUpdatedMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const sendAccountDeactivatedMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Account Deactivation Confirmation',
+        template: 'invAccountDeactivatedMail',
+        context: {
+            fullName: payload.fullName,
+            accountNumber: payload.accountNumber,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
     sendAccountRegistrationMail,
-    sendAccountUpdatedMail
+    sendAccountUpdatedMail,
+    sendAccountDeactivatedMail
 };
