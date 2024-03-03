@@ -71,9 +71,26 @@ const sendAccountReactivationMail = (payload) => {
     sendMail(payload.emailId, mailOptions);
 }
 
+const sendAccountDeletionMail = (payload) => {
+    const mailOptions = {
+        from: 'Wallet watcher',
+        to: payload.emailId,
+        subject: 'Confirmation: Investment Account Deletion Request Processed',
+        template: 'invAccountDeletedMail',
+        context: {
+            fullName: payload.fullName,
+            accountNumber: payload.accountNumber,
+            custContactEmailId: process.env.EMAIL_USER
+        }
+    };
+
+    sendMail(payload.emailId, mailOptions);
+}
+
 export {
     sendAccountRegistrationMail,
     sendAccountUpdatedMail,
     sendAccountDeactivationMail,
-    sendAccountReactivationMail
+    sendAccountReactivationMail,
+    sendAccountDeletionMail
 };

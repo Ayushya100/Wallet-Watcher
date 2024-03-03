@@ -7,9 +7,9 @@ import accountServices from '../../controllers/investment-account-controllers/in
 const deleteAccount = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const accountId = req.params.id;
+        const accountToken = req.params.accountToken;
 
-        const isAccountDeleted = await accountServices.deleteAccount(userId, accountId);
+        const isAccountDeleted = await accountServices.deleteAccount(userId, accountToken);
 
         if (isAccountDeleted.isValid) {
             res.status(responseCodes[isAccountDeleted.resType]).json(
