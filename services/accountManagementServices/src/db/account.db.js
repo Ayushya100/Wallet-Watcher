@@ -77,10 +77,10 @@ const updateExistingAccount = async(userId, accountToken, payload) => {
     return updatedAccountInfo;
 }
 
-const deactivateAccount = async(userId, accountId) => {
-    const updatedAccountInfo = await Account.findByIdAndUpdate(
+const deactivateAccount = async(userId, accountToken) => {
+    const updatedAccountInfo = await Account.findOneAndUpdate(
         {
-            _id: accountId,
+            token: accountToken,
             userId: userId
         },
         {

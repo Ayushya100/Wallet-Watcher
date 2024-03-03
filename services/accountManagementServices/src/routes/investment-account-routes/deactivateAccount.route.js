@@ -7,20 +7,29 @@ import accountServices from '../../controllers/investment-account-controllers/in
 const deactivateAccount = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const accountId = req.params.id;
+        const accountToken = req.params.accountToken;
+        const accountDetails = req.accountDetails;
 
-        const isAccountDeactivated = await accountServices.deactivateAccount(userId, accountId);
-
-        if (isAccountDeactivated.isValid) {
-            res.status(responseCodes[isAccountDeactivated.resType]).json(
-                new ApiResponse(
-                    responseCodes[isAccountDeactivated.resType],
-                    isAccountDeactivated.data,
-                    isAccountDeactivated.resMsg + ' - ' + responseMessage[isAccountDeactivated.resType]
-                )
-            );
+        if (accountDetails.isActive) {
+            const isAccountDeactivated = await accountServices.deactivateAccount(userId, accountToken);
+    
+            if (isAccountDeactivated.isValid) {
+                res.status(responseCodes[isAccountDeactivated.resType]).json(
+                    new ApiResponse(
+                        responseCodes[isAccountDeactivated.resType],
+                        isAccountDeactivated.data,
+                        isAccountDeactivated.resMsg + ' - ' + responseMessage[isAccountDeactivated.resType]
+                    )
+                );
+            } else {
+                return next(isAccountDeactivated);
+            }
         } else {
-            return next(isAccountDeactivated);
+            return next({
+                resType: 'BAD_REQUEST',
+                resMsg: 'Already Deactive Account',
+                isValid: false
+            });
         }
     } catch (err) {
         next({
