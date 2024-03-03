@@ -52,11 +52,11 @@ const getAccountByToken = async(userId, accountToken) => {
     return accountInfo;
 }
 
-const updateExistingAccount = async(userId, accountId, payload) => {
-    const existingAccountInfo = await getAccountById(userId, accountId);
-    const updatedAccountInfo = await Account.findByIdAndUpdate(
+const updateExistingAccount = async(userId, accountToken, payload) => {
+    const existingAccountInfo = await getAccountByToken(userId, accountToken);
+    const updatedAccountInfo = await Account.findOneAndUpdate(
         {
-            _id: accountId,
+            token: accountToken,
             userId: userId,
             isDeleted: false
         },

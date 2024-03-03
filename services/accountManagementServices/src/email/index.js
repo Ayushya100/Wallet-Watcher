@@ -18,7 +18,8 @@ import {
   sendCardDeletionMail
 } from './cardMails.js';
 import { 
-  sendAccountRegistrationMail
+  sendAccountRegistrationMail,
+  sendAccountUpdatedMail
 } from './accountMails.js';
 
 export default {
@@ -35,5 +36,6 @@ export default {
   sendCardDeactivatedMail,
   sendCardReactivationMail,
   sendCardDeletionMail,
-  sendAccountRegistrationMail
+  sendAccountRegistrationMail,
+  sendAccountUpdatedMail
 };
