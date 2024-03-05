@@ -22,7 +22,12 @@ import {
   resetUserPassword,
   isSettingByNameAvailable,
   createNewSetting,
-  getAllSettings
+  getAllSettings,
+  isSettingByIdAvailable,
+  getAllUsersId,
+  getSelectedUsersId,
+  getUsersToAssignSetting,
+  createUserDashboardSettings
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -66,6 +71,11 @@ export default {
   isSettingByNameAvailable,
   createNewSetting,
   getAllSettings,
+  isSettingByIdAvailable,
+  getAllUsersId,
+  getSelectedUsersId,
+  getUsersToAssignSetting,
+  createUserDashboardSettings,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

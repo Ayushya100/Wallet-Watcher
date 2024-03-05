@@ -85,6 +85,7 @@ app.put(`${USERS_API}/:userId/update-dashboard-settings/:id`, verifyToken(tokenK
 // Dashboard Setting Routes
 app.post(`${USERS_API}/create-setting`, settingRoutes.createSetting);
 app.get(`${USERS_API}/get-all-settings`, settingRoutes.getAllSettings);
+app.post(`${USERS_API}/assign-settings`, settingRoutes.assignSettingsToUser);
 
 // Error Handler middleware
 app.use(errorHandler);
