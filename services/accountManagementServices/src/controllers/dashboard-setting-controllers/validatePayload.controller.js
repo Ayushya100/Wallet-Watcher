@@ -22,6 +22,27 @@ const validateCreateSettingPayload = (payload) => {
     return response;
 }
 
+const validateAssignSettingPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+    
+    if (!payload.settingId) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'No Setting to assign found';
+        response.isValid = false;
+    }
+    if (!payload.value) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Default Value is required';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
-    validateCreateSettingPayload
+    validateCreateSettingPayload,
+    validateAssignSettingPayload
 };

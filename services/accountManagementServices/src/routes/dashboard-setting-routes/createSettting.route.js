@@ -8,9 +8,9 @@ const createSetting = async(req, res, next) => {
     try {
         const payload = req.body;
 
-        const validatePayload = dashboardServices.validateCreateSettingPayload(payload);
+        const isValidPayload = dashboardServices.validateCreateSettingPayload(payload);
 
-        if (validatePayload.isValid) {
+        if (isValidPayload.isValid) {
             const isSettingAvailable = await dashboardServices.isSettingAvailable(payload);
 
             if (isSettingAvailable.isValid) {
@@ -31,7 +31,7 @@ const createSetting = async(req, res, next) => {
                 return next(isSettingAvailable);
             }
         } else {
-            return next(validatePayload);
+            return next(isValidPayload);
         }
     } catch (err) {
         next({

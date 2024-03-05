@@ -43,6 +43,24 @@ const getCompleteUserInfoById = async(userId) => {
     return userInfo;
 }
 
+const getAllUsersId = async() => {
+    const allUsersId = await User.find({
+        isDeleted: false
+    }).select('_id');
+    return allUsersId;
+}
+
+const getSelectedUsersId = async(userIds) => {
+    const selectedUsersId = await User.find({
+        _id: {
+            $in: userIds
+        },
+        isDeleted: false
+    }).select('_id');
+
+    return selectedUsersId;
+}
+
 const generateVerificationCode = async(userId) => {
     const user = await User.findById({ _id: userId });
     const verificationCode = uuidv4() + user._id;
@@ -386,6 +404,31 @@ const getAllSettings = async() => {
     return settingDetails;
 }
 
+const isSettingByIdAvailable = async(settingId) => {
+    const settingDetails = await DashboardSettings.findById({
+        _id: settingId
+    }).select(
+        'categoryName categoryDescription categoryType type isPeriodic duration'
+    );
+    return settingDetails;
+}
+
+const getUsersToAssignSetting = async(userIds, settingId) => {
+    const usersAlreadyAssigned = await UserDashboard.find({
+        userId: {
+            $in: userIds
+        },
+        settingId: settingId,
+        isDeleted: false
+    }).select('userId');
+    return usersAlreadyAssigned;
+}
+
+const createUserDashboardSettings = async(users) => {
+    const createUserDashboard = await UserDashboard.create(users);
+    return createUserDashboard;
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
@@ -408,5 +451,10 @@ export {
     resetUserPassword,
     isSettingByNameAvailable,
     createNewSetting,
-    getAllSettings
+    getAllSettings,
+    isSettingByIdAvailable,
+    getAllUsersId,
+    getSelectedUsersId,
+    getUsersToAssignSetting,
+    createUserDashboardSettings
 };
