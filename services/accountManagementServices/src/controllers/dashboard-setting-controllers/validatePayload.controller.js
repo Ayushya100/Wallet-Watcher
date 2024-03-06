@@ -42,7 +42,23 @@ const validateAssignSettingPayload = (payload) => {
     return response;
 }
 
+const validateUpdateSettingPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userId) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'User Id is required';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateCreateSettingPayload,
-    validateAssignSettingPayload
+    validateAssignSettingPayload,
+    validateUpdateSettingPayload
 };

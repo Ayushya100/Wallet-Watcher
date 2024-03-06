@@ -27,7 +27,8 @@ import {
   getAllUsersId,
   getSelectedUsersId,
   getUsersToAssignSetting,
-  createUserDashboardSettings
+  createUserDashboardSettings,
+  updateSettingDetails
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -76,6 +77,7 @@ export default {
   getSelectedUsersId,
   getUsersToAssignSetting,
   createUserDashboardSettings,
+  updateSettingDetails,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

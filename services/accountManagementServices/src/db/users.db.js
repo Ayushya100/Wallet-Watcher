@@ -429,6 +429,23 @@ const createUserDashboardSettings = async(users) => {
     return createUserDashboard;
 }
 
+const updateSettingDetails = async(settingId, payload) => {
+    const updatedDetails = await DashboardSettings.findByIdAndUpdate(
+        {
+            _id: settingId
+        },
+        {
+            $set: payload
+        },
+        {
+            new: true
+        }
+    ).select(
+        'categoryName categoryDescription categoryType type isPeriodic duration'
+    );
+    return updatedDetails;
+}
+
 export {
     isUserByUserNameOrEmailAvailable,
     isUserByIdAvailable,
@@ -456,5 +473,6 @@ export {
     getAllUsersId,
     getSelectedUsersId,
     getUsersToAssignSetting,
-    createUserDashboardSettings
+    createUserDashboardSettings,
+    updateSettingDetails
 };
