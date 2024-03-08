@@ -84,7 +84,8 @@ app.put(`${USERS_API}/:userId/update-dashboard-settings/:id`, verifyToken(tokenK
 
 // Dashboard Setting Routes
 app.post(`${USERS_API}/create-setting`, settingRoutes.createSetting);
-app.get(`${USERS_API}/get-all-settings`, settingRoutes.getAllSettings);
+app.get(`${USERS_API}/get-setting-info`, settingRoutes.getSettingInfo);
+app.get(`${USERS_API}/get-setting-info/:id`, settingRoutes.getSettingInfo);
 app.post(`${USERS_API}/assign-settings/:id`, settingRoutes.assignSettingsToUser);
 app.put(`${USERS_API}/update-settings/:id`, settingRoutes.updateSetting);
 
