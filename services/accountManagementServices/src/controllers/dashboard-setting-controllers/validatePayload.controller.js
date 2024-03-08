@@ -29,11 +29,6 @@ const validateAssignSettingPayload = (payload) => {
         isValid: true
     };
     
-    if (!payload.settingId) {
-        response.resType = 'BAD_REQUEST';
-        response.resMsg = 'No Setting to assign found';
-        response.isValid = false;
-    }
     if (!payload.value) {
         response.resType = 'BAD_REQUEST';
         response.resMsg = 'Default Value is required';
