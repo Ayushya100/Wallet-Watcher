@@ -1,6 +1,6 @@
 'use strict';
 
-import dbConnection from '../../db/index.js';
+import dbConnect from '../../db/index.js';
 import emailServices from '../../email/index.js';
 
 // Check for existing user with provided userName or emailId
@@ -14,7 +14,7 @@ const checkUserByUserNameOrEmail = async(payload) => {
             resMsg: 'VALIDATION SUCCESSFULL',
             isValid: true
         };
-        const isUserFound = await dbConnection.isUserByUserNameOrEmailAvailable(userName, emailId);
+        const isUserFound = await dbConnect.isUserByUserNameOrEmailAvailable(userName, emailId);
 
         if (isUserFound) {
             response.resType = 'CONFLICT';
@@ -36,7 +36,17 @@ const checkUserByUserNameOrEmail = async(payload) => {
 // Create a new user and send verification mail
 const createNewUser = async(payload) => {
     try {
-        const newUser = await dbConnection.createNewUser(payload);
+        const newUser = await dbConnect.createNewUser(payload);
+
+        let allSettingsInfoToAdd = await dbConnect.getAllSettings();
+        allSettingsInfoToAdd = allSettingsInfoToAdd.map((setting) => ({
+            userId: newUser._id,
+            settingId: setting._id,
+            type: setting.type || 'Boolean',
+            value: false
+        }));
+
+        await dbConnect.createUserDashboardSettings(allSettingsInfoToAdd);
 
         if (newUser) {
             const userId = newUser._id;
