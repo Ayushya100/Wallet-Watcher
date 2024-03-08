@@ -88,6 +88,7 @@ app.get(`${USERS_API}/get-setting-info`, settingRoutes.getSettingInfo);
 app.get(`${USERS_API}/get-setting-info/:id`, settingRoutes.getSettingInfo);
 app.post(`${USERS_API}/assign-settings/:id`, settingRoutes.assignSettingsToUser);
 app.put(`${USERS_API}/update-settings/:id`, settingRoutes.updateSetting);
+app.put(`${USERS_API}/deassign-settings/:id`, settingRoutes.deassignSetting);
 
 // Error Handler middleware
 app.use(errorHandler);

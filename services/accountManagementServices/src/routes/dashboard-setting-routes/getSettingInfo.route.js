@@ -1,7 +1,7 @@
 'use strict';
 
 import { ApiResponse, responseCodes, responseMessage } from 'lib-service-comms';
-import dashboardSettings from '../../controllers/dashboard-setting-controllers/index.js';
+import dashboardServices from '../../controllers/dashboard-setting-controllers/index.js';
 
 // API Function
 const getSettingInfo = async(req, res, next) => {
@@ -9,7 +9,7 @@ const getSettingInfo = async(req, res, next) => {
         const settingId = req.params.id;
         
         if (!settingId) {
-            const isAllSettingsFound = await dashboardSettings.getAllSettings();
+            const isAllSettingsFound = await dashboardServices.getAllSettings();
 
             if (isAllSettingsFound.isValid) {
                 res.status(responseCodes[isAllSettingsFound.resType]).json(
@@ -23,7 +23,7 @@ const getSettingInfo = async(req, res, next) => {
                 return next(isAllSettingsFound);
             }
         } else {
-            const isSettingInfoFound = await dashboardSettings.isSettingByIdAvailable(settingId);
+            const isSettingInfoFound = await dashboardServices.isSettingByIdAvailable(settingId);
 
             if (isSettingInfoFound.isValid) {
                 res.status(responseCodes[isSettingInfoFound.resType]).json(

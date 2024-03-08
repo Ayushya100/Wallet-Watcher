@@ -26,9 +26,11 @@ import {
   isSettingByIdAvailable,
   getAllUsersId,
   getSelectedUsersId,
-  getUsersToAssignSetting,
+  getUsersWithAssignedSetting,
   createUserDashboardSettings,
-  updateSettingDetails
+  updateSettingDetails,
+  getAllUsersWithAssignedSetting,
+  deassignUserSettings
 } from './users.db.js';
 import {
   isCardByCardNumberAvailable,
@@ -75,9 +77,11 @@ export default {
   isSettingByIdAvailable,
   getAllUsersId,
   getSelectedUsersId,
-  getUsersToAssignSetting,
+  getUsersWithAssignedSetting,
   createUserDashboardSettings,
   updateSettingDetails,
+  getAllUsersWithAssignedSetting,
+  deassignUserSettings,
   isCardByCardNumberAvailable,
   createNewCard,
   getAllCardInfo,

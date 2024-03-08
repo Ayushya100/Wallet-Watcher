@@ -2,7 +2,7 @@
 
 import { ApiResponse, responseCodes, responseMessage } from 'lib-service-comms';
 import userServices from '../../controllers/user-controllers/index.js';
-import dashboardSettings from '../../controllers/dashboard-setting-controllers/index.js';
+import dashboardServices from '../../controllers/dashboard-setting-controllers/index.js';
 
 // API Function
 const updateSetting = async(req, res, next) => {
@@ -11,7 +11,7 @@ const updateSetting = async(req, res, next) => {
         const payload = req.body;
         
         // Validate Payload
-        const isValidPayload = dashboardSettings.validateUpdateSettingPayload(payload);
+        const isValidPayload = dashboardServices.validateUpdateSettingPayload(payload);
 
         if (isValidPayload.isValid) {
             // Is provided user exists
@@ -19,11 +19,11 @@ const updateSetting = async(req, res, next) => {
 
             if (isUserExists.isValid) {
                 // Check Setting By Id Available
-                const isSettingAvailable = await dashboardSettings.isSettingByIdAvailable(settingId);
+                const isSettingAvailable = await dashboardServices.isSettingByIdAvailable(settingId);
         
                 if (isSettingAvailable.isValid) {
                     // Update Setting Details
-                    const isSettingUpdated = await dashboardSettings.updateSettings(settingId, payload, isSettingAvailable.data);
+                    const isSettingUpdated = await dashboardServices.updateSettings(settingId, payload, isSettingAvailable.data);
         
                     if (isSettingUpdated.isValid) {
                         res.status(responseCodes[isSettingUpdated.resType]).json(

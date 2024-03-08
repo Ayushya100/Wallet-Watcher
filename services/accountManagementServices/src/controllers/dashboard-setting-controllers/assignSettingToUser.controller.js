@@ -3,7 +3,7 @@
 import dbConnect from '../../db/index.js';
 
 const getUsersListToAssignSettings = async(usersId, settingId) => {
-    let usersAlreadyAssigned = await dbConnect.getUsersToAssignSetting(usersId, settingId);
+    let usersAlreadyAssigned = await dbConnect.getUsersWithAssignedSetting(usersId, settingId);
     usersAlreadyAssigned = usersAlreadyAssigned.map(({userId}) => String(userId));
 
     if (usersAlreadyAssigned.length === 0) {
@@ -88,7 +88,7 @@ const assignSettingToUser = async(payload) => {
             resMsg: 'Settings assigned to Users Successfully',
             data: createUserDashboard,
             isValid: true
-        }
+        };
     } catch (err) {
         return {
             resType: 'INTERNAL_SERVER_ERROR',
