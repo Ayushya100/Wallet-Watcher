@@ -92,7 +92,6 @@ const createNewUser = async(payload) => {
     });
 
     await UserFinance.create({ userId: newUser._id });
-    // await UserDashboard.create({ userId: newUser._id });
 
     const updatedUser = await generateVerificationCode(newUser._id);
     return updatedUser;
