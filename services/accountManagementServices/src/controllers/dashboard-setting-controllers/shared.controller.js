@@ -8,7 +8,7 @@ const isSettingByIdAvailable = async(settingId) => {
 
         if (!settingFound) {
             return {
-                resType: 'BAD_REQUEST',
+                resType: 'NOT_FOUND',
                 resMsg: 'Setting does not found',
                 isValid: false
             };

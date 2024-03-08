@@ -414,7 +414,7 @@ const isSettingByIdAvailable = async(settingId) => {
     return settingDetails;
 }
 
-const getUsersToAssignSetting = async(userIds, settingId) => {
+const getUsersWithAssignedSetting = async(userIds, settingId) => {
     const usersAlreadyAssigned = await UserDashboard.find({
         userId: {
             $in: userIds
@@ -423,6 +423,14 @@ const getUsersToAssignSetting = async(userIds, settingId) => {
         isDeleted: false
     }).select('userId');
     return usersAlreadyAssigned;
+}
+
+const getAllUsersWithAssignedSetting = async(settingId) => {
+    const usersAssignedDetails = await UserDashboard.find({
+        settingId: settingId,
+        isDeleted: false
+    }).select('userId');
+    return usersAssignedDetails;
 }
 
 const createUserDashboardSettings = async(users) => {
@@ -445,6 +453,30 @@ const updateSettingDetails = async(settingId, payload) => {
         'categoryName categoryDescription categoryType type isPeriodic duration'
     );
     return updatedDetails;
+}
+
+const deassignUserSettings = async(ids) => {
+    const updatedSettingDetails = await UserDashboard.updateMany(
+        {
+            _id: {
+                $in: ids
+            },
+            isDeleted: false
+        },
+        {
+            $set: {
+                isDeleted: true,
+                modifiedOn: Date.now(),
+                modifiedBy: 'SYSTEM_DEASSIGN'
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'settingId type value isDeleted'
+    );
+    return updatedSettingDetails;
 }
 
 export {
@@ -473,7 +505,9 @@ export {
     isSettingByIdAvailable,
     getAllUsersId,
     getSelectedUsersId,
-    getUsersToAssignSetting,
+    getUsersWithAssignedSetting,
     createUserDashboardSettings,
-    updateSettingDetails
+    updateSettingDetails,
+    getAllUsersWithAssignedSetting,
+    deassignUserSettings
 };
