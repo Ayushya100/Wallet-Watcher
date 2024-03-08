@@ -406,7 +406,8 @@ const getAllSettings = async() => {
 
 const isSettingByIdAvailable = async(settingId) => {
     const settingDetails = await DashboardSettings.findById({
-        _id: settingId
+        _id: settingId,
+        isDeleted: false
     }).select(
         'categoryName categoryDescription categoryType type isPeriodic duration'
     );

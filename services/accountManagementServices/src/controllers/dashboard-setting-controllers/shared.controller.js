@@ -14,6 +14,15 @@ const isSettingByIdAvailable = async(settingId) => {
             };
         }
 
+        if (settingFound.length === 0) {
+            return {
+                resType: 'CONTENT_NOT_AVAILABLE',
+                resMsg: 'No User Available to Assign Setting',
+                data: [],
+                isValid: false
+            };
+        }
+
         return {
             resType: 'SUCCESS',
             resMsg: 'VALIDATION SUCCESSFULL',

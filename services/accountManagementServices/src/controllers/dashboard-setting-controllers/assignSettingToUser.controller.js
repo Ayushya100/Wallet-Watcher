@@ -61,6 +61,7 @@ const assignSettingToUser = async(payload) => {
             return {
                 resType: 'CONTENT_NOT_AVAILABLE',
                 resMsg: 'No User Available to Assign Setting',
+                data: [],
                 isValid: false
             };
         }
