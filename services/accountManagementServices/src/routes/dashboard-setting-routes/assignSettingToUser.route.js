@@ -6,6 +6,7 @@ import dashboardSettings from '../../controllers/dashboard-setting-controllers/i
 // API Function
 const assignSettingsToUser = async(req, res, next) => {
     try {
+        const settingId = req.params.id;
         const payload = req.body;
 
         // Validate Payload
@@ -13,10 +14,11 @@ const assignSettingsToUser = async(req, res, next) => {
 
         if (isValidPayload.isValid) {
             // Is setting exists
-            const isSettingValid = await dashboardSettings.isSettingByIdAvailable(payload.settingId);
+            const isSettingValid = await dashboardSettings.isSettingByIdAvailable(settingId);
 
             if (isSettingValid.isValid) {
                 // Assign settings to users
+                payload.settingId = settingId;
                 payload.type = isSettingValid.data?.type;
                 const isSettingAssigned = await dashboardSettings.assignSettingToUser(payload);
     
