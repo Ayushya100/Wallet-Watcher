@@ -7,13 +7,15 @@ import dashboardServices from '../../controllers/user-dashboard-controllers/inde
 const updateUserDashboardSettings = async(req, res, next) => {
     try {
         const userId = req.params.userId;
-        const dashboardId = req.params.id;
+        const dashboardId = req.params.dashboardId;
         const payload = req.body;
 
         // Check if user settings exist
-        const isDashboardSettingsFound = await dashboardServices.getUserDashboardSetting(userId);
+        const isDashboardSettingsFound = await dashboardServices.getUserDashboardSetting(userId, dashboardId);
 
         if (isDashboardSettingsFound.isValid) {
+            payload.type = isDashboardSettingsFound.data.type;
+            payload.value = payload.value || isDashboardSettingsFound.data.value;
             const isSettingsUpdated = await dashboardServices.updateUserDashboardSettings(userId, dashboardId, payload);
 
             if (isSettingsUpdated.isValid) {
