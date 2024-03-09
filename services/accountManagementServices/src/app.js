@@ -80,7 +80,7 @@ app.get(`${USERS_API}/generate-account-number`, verifyToken(tokenKey), accountRo
 
 // User Dashboard Setting Routes
 app.get(`${USERS_API}/:userId/get-dashboard-settings`, verifyToken(tokenKey), dashboardRoutes.getUserDashboardSetting);
-app.put(`${USERS_API}/:userId/update-dashboard-settings/:id`, verifyToken(tokenKey), dashboardRoutes.updateUserDashboardSettings);
+app.put(`${USERS_API}/:userId/update-dashboard-settings/:dashboardId`, verifyToken(tokenKey), dashboardRoutes.updateUserDashboardSettings);
 
 // Dashboard Setting Routes
 app.post(`${USERS_API}/create-setting`, settingRoutes.createSetting);

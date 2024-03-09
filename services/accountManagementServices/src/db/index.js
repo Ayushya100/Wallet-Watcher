@@ -11,6 +11,7 @@ import {
   generateAccessAndRefreshTokens,
   logoutUser,
   getDashboardSettingById,
+  isUserSettingByIdAvailable,
   updateUserDashboardSetting,
   updateUserInfo,
   updateUserPassword,
@@ -99,5 +100,6 @@ export default {
   reactivateAccount,
   deleteAccount,
   getDashboardSettingById,
+  isUserSettingByIdAvailable,
   updateUserDashboardSetting
 };

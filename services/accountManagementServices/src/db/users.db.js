@@ -394,6 +394,17 @@ const getDashboardSettingById = async(userId) => {
     return userDashboardSettings;
 }
 
+const isUserSettingByIdAvailable = async(userId, dashboardId) => {
+    const isSettingAvailable = await UserDashboard.findOne({
+        _id: dashboardId,
+        userId: userId,
+        isDeleted: false
+    }).select(
+        'userId settingId type value isDeleted'
+    );
+    return isSettingAvailable;
+}
+
 const updateUserDashboardSetting = async(userId, dashboardId, payload) => {
     const updatedDashboardSettings = await UserDashboard.findByIdAndUpdate(
         {
@@ -401,7 +412,11 @@ const updateUserDashboardSetting = async(userId, dashboardId, payload) => {
             userId: userId
         },
         {
-            $set: payload
+            $set: {
+                value: payload.value,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
         },
         {
             new: true
@@ -530,6 +545,7 @@ export {
     generateAccessAndRefreshTokens,
     logoutUser,
     getDashboardSettingById,
+    isUserSettingByIdAvailable,
     updateUserDashboardSetting,
     updateUserInfo,
     updateUserPassword,

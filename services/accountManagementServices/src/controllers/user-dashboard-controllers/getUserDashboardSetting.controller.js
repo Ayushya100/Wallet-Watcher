@@ -2,9 +2,9 @@
 
 import dbConnect from '../../db/index.js';
 
-const getUserDashboardSetting = async(userId) => {
+const getUserDashboardSetting = async(userId, dashboardId) => {
     try {
-        const userDashboardSettings = await dbConnect.getDashboardSettingById(userId);
+        const userDashboardSettings = await dbConnect.isUserSettingByIdAvailable(userId, dashboardId);
 
         if (userDashboardSettings) {
             return {

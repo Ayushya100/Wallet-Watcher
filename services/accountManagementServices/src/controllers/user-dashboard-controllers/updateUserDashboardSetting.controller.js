@@ -4,9 +4,13 @@ import dbConnect from '../../db/index.js';
 
 const updateUserDashboardSettings = async(userId, dashboardId, payload) => {
     try {
-        payload.modifiedOn = Date.now();
-        payload.modifiedBy = userId;
-
+        if ((payload.type === 'Boolean') && (typeof payload.value != 'boolean')) {
+            return {
+                resType: 'BAD_REQUEST',
+                resMsg: 'Value parameter is not boolean',
+                isValid: false
+            };
+        }
         const updatedDashboardSettings = await dbConnect.updateUserDashboardSetting(userId, dashboardId, payload);
 
         if (updatedDashboardSettings) {
