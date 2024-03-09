@@ -343,13 +343,54 @@ const resetUserPassword = async(userId, password) => {
 }
 
 const getDashboardSettingById = async(userId) => {
-    const userDashboardSettings = await UserDashboard.findOne(
+    const userDashboardSettings = await UserDashboard.aggregate([
         {
-            userId: userId
+            $match: {
+                userId: new mongoose.mongoose.Types.ObjectId(userId)
+            }
+        },
+        {
+            $lookup: {
+                from: 'dashboardsettings',
+                localField: 'settingId',
+                foreignField: '_id',
+                as: 'dashboard'
+            }
+        },
+        {
+            $addFields: {
+                categoryName: {
+                    $arrayElemAt: ['$dashboard.categoryName', 0]
+                },
+                categoryDescription: {
+                    $arrayElemAt: ['$dashboard.categoryDescription', 0]
+                },
+                categoryType: {
+                    $arrayElemAt: ['$dashboard.categoryType', 0]
+                },
+                isPeriodic: {
+                    $arrayElemAt: ['$dashboard.isPeriodic', 0]
+                },
+                duration: {
+                    $arrayElemAt: ['$dashboard.duration', 0]
+                }
+            }
+        },
+        {
+            $project: {
+                categoryName: 1,
+                categoryDescription: 1,
+                categoryType: 1,
+                isPeriodic: 1,
+                duration: 1,
+                settingId: 1,
+                type: 1,
+                value: 1,
+                isDeleted: 1
+            }
         }
-    ).select(
-        '-createdOn -createdBy -modifiedOn -modifiedBy -isDeleted'
-    );
+    ]);
+
     return userDashboardSettings;
 }
 
