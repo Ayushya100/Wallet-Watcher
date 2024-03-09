@@ -40,6 +40,8 @@ const tokenKey = process.env.ACCESS_TOKEN_KEY;
 
 // Category Routes
 app.post(`${FINANCE_API}/register-category`, verifyToken(tokenKey), categoryRoutes.registerNewCategory);
+app.get(`${FINANCE_API}/get-category-info`, verifyToken(tokenKey), categoryRoutes.getCategoryInfo);
+app.get(`${FINANCE_API}/get-category-info/:id`, verifyToken(tokenKey), categoryRoutes.getCategoryInfo);
 
 // Error Handler middleware
 app.use(errorHandler);
