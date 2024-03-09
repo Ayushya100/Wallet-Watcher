@@ -18,7 +18,7 @@ const assignSettingsToUser = async(req, res, next) => {
 
             if (isSettingValid.isValid) {
                 // Assign settings to users
-                payload.settingId = settingId;
+                payload.settingId = isSettingValid.data._id || settingId;
                 payload.type = isSettingValid.data?.type;
                 const isSettingAssigned = await dashboardServices.assignSettingToUser(payload);
     
