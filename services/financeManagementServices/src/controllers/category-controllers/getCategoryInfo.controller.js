@@ -12,7 +12,7 @@ const getAllCategoryInfo = async(userId) => {
                 resMsg: 'No category found',
                 data: allCategoryInfo,
                 isValid: true
-            }
+            };
         }
         return {
             resType: 'SUCCESS',
@@ -39,7 +39,7 @@ const getCategoryInfoById = async(userId, categoryId) => {
                 resType: 'BAD_REQUEST',
                 resMsg: 'No category found',
                 isValid: false
-            }
+            };
         }
         return {
             resType: 'SUCCESS',
@@ -68,7 +68,7 @@ const getCategoryByType = async(userId, categoryType) => {
                 resMsg: 'No category found',
                 data: categoryInfo,
                 isValid: true
-            }
+            };
         }
         return {
             resType: 'SUCCESS',

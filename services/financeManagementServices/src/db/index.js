@@ -5,7 +5,9 @@ import {
     createNewCategory,
     getAllCategoryInfo,
     getCategoryInfoById,
-    getCategoryInfoByType
+    getCategoryInfoByType,
+    isCategoryByIdAvailable,
+    updateCategoryName
 } from './finance.db.js';
 
 export default {
@@ -13,5 +15,7 @@ export default {
     createNewCategory,
     getAllCategoryInfo,
     getCategoryInfoById,
-    getCategoryInfoByType
+    getCategoryInfoByType,
+    isCategoryByIdAvailable,
+    updateCategoryName
 };

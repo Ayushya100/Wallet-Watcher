@@ -76,8 +76,30 @@ const validateUserInfoPayload = (userId, categoryType) => {
     return response;
 }
 
+const validateUpdateCategoryPayload = (payload) => {
+    let response = {
+        resType: 'SUCCESS',
+        resMsg: 'VALIDATION SUCCESSFULL',
+        isValid: true
+    };
+
+    if (!payload.userId) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'User Id is missing';
+        response.isValid = false;
+    }
+
+    if (!payload.categoryName) {
+        response.resType = 'BAD_REQUEST';
+        response.resMsg = 'Category Name is missing';
+        response.isValid = false;
+    }
+    return response;
+}
+
 export {
     validateNewCategoryPayload,
     validateUserExistsPayload,
-    validateUserInfoPayload
+    validateUserInfoPayload,
+    validateUpdateCategoryPayload
 };
