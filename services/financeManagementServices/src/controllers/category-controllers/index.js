@@ -14,6 +14,7 @@ import {
 } from './getCategoryInfo.controller.js';
 import { isCategoryInfoByIdExists } from './shared.controller.js';
 import { updateCategoryName } from './updateCategoryInfo.controller.js';
+import { deleteCategory } from './deleteCategory.controller.js';
 
 export default {
     validateNewCategoryPayload,
@@ -26,5 +27,6 @@ export default {
     getCategoryInfoById,
     getCategoryByType,
     isCategoryInfoByIdExists,
-    updateCategoryName
+    updateCategoryName,
+    deleteCategory
 };
