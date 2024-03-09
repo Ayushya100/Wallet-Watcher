@@ -15,6 +15,14 @@ const verifyToken = (tokenKey) => (req, res, next) => {
         }
 
         const decodedToken = jwt.verify(accessToken, tokenKey);
+        if ((req.params.userId) && (req.params.userId !== decodedToken._id)) {
+            return next({
+                resType: 'UNAUTHORIZED',
+                resMsg: 'UNAUTHORIZED ACCESS - USER MISMATCHED',
+                isValid: false
+            });
+        }
+
         req.user = {
             userId: decodedToken._id
         };
