@@ -20,6 +20,18 @@ const isCategoryByNameAvailable = async(payload) => {
     return categoryDetails;
 }
 
+const isCategoryByIdAvailable = async(userId, categoryId) => {
+    const categoryDetails = await UserWalletCategory.findOne({
+        _id: categoryId,
+        userId: userId,
+        isDeleted: false
+    }).select(
+        'userId categoryType categoryName'
+    );
+    
+    return categoryDetails;
+}
+
 const createNewCategory = async(payload) => {
     const categoryDetails = await UserWalletCategory.create({
         userId: payload.userId,
@@ -65,10 +77,36 @@ const getCategoryInfoByType = async(userId, categoryType) => {
     return categoryDetails;
 }
 
+const updateCategoryName = async(categoryId, payload) => {
+    const updatedCategoryDetails = await UserWalletCategory.findOneAndUpdate(
+        {
+            _id: categoryId,
+            userId: payload.userId,
+            isDeleted: false
+        },
+        {
+            $set: {
+                categoryName: payload.categoryName,
+                modifiedOn: Date.now(),
+                modifiedBy: payload.userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'userId categoryName categoryType'
+    );
+
+    return updatedCategoryDetails;
+}
+
 export {
     isCategoryByNameAvailable,
     createNewCategory,
     getAllCategoryInfo,
     getCategoryInfoById,
-    getCategoryInfoByType
+    getCategoryInfoByType,
+    isCategoryByIdAvailable,
+    updateCategoryName
 };

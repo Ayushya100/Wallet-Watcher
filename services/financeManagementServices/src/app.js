@@ -43,6 +43,7 @@ app.post(`${FINANCE_API}/register-category`, verifyToken(tokenKey), categoryRout
 app.get(`${FINANCE_API}/get-category-info`, verifyToken(tokenKey), categoryRoutes.getCategoryInfo);
 app.get(`${FINANCE_API}/get-category-info/:id`, verifyToken(tokenKey), categoryRoutes.getCategoryInfo);
 app.get(`${FINANCE_API}/get-category-by-type/:categoryType`, verifyToken(tokenKey), categoryRoutes.getCategoryByType);
+app.put(`${FINANCE_API}/update-category/:id`, verifyToken(tokenKey), categoryRoutes.updateCategoryName);
 
 // Error Handler middleware
 app.use(errorHandler);
