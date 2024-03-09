@@ -2,21 +2,21 @@
 
 import dbConnect from '../../db/index.js';
 
-const isCategoryInfoByIdExists = async(userId, categoryId) => {
+const deleteCategory = async(userId, categoryId) => {
     try {
-        const categoryInfo = await dbConnect.isCategoryByIdAvailable(userId, categoryId);
+        const updatedCategoryInfo = await dbConnect.deleteCategoryById(userId, categoryId);
 
-        if (!categoryInfo) {
+        if (!updatedCategoryInfo) {
             return {
                 resType: 'BAD_REQUEST',
-                resMsg: 'No category found',
+                resMsg: 'Category Deletion Failed!',
                 isValid: false
             };
         }
         return {
-            resType: 'SUCCESS',
-            resMsg: 'Category details found.',
-            data: categoryInfo,
+            resType: 'REQUEST_COMPLETED',
+            resMsg: 'Category info has been updated successfully.',
+            data: updatedCategoryInfo,
             isValid: true
         };
     } catch (err) {
@@ -30,5 +30,5 @@ const isCategoryInfoByIdExists = async(userId, categoryId) => {
 }
 
 export {
-    isCategoryInfoByIdExists
+    deleteCategory
 };

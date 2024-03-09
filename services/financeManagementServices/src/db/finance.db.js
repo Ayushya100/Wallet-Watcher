@@ -101,6 +101,30 @@ const updateCategoryName = async(categoryId, payload) => {
     return updatedCategoryDetails;
 }
 
+const deleteCategoryById = async(userId, categoryId) => {
+    const updatedCategoryDetails = await UserWalletCategory.findOneAndUpdate(
+        {
+            _id: categoryId,
+            userId: userId,
+            isDeleted: false
+        },
+        {
+            $set: {
+                isDeleted: true,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'userId categoryName categoryType isDeleted'
+    );
+
+    return updatedCategoryDetails;
+}
+
 export {
     isCategoryByNameAvailable,
     createNewCategory,
@@ -108,5 +132,6 @@ export {
     getCategoryInfoById,
     getCategoryInfoByType,
     isCategoryByIdAvailable,
-    updateCategoryName
+    updateCategoryName,
+    deleteCategoryById
 };

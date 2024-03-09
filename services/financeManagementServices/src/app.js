@@ -44,6 +44,7 @@ app.get(`${FINANCE_API}/get-category-info`, verifyToken(tokenKey), categoryRoute
 app.get(`${FINANCE_API}/get-category-info/:id`, verifyToken(tokenKey), categoryRoutes.getCategoryInfo);
 app.get(`${FINANCE_API}/get-category-by-type/:categoryType`, verifyToken(tokenKey), categoryRoutes.getCategoryByType);
 app.put(`${FINANCE_API}/update-category/:id`, verifyToken(tokenKey), categoryRoutes.updateCategoryName);
+app.delete(`${FINANCE_API}/delete-category/:id`, verifyToken(tokenKey), categoryRoutes.deleteCategory);
 
 // Error Handler middleware
 app.use(errorHandler);
