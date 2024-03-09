@@ -30,7 +30,32 @@ const createNewCategory = async(payload) => {
     return categoryDetails;
 }
 
+const getAllCategoryInfo = async(userId) => {
+    const categoryDetails = await UserWalletCategory.find({
+        userId: userId,
+        isDeleted: false
+    }).select(
+        'categoryName categoryType'
+    );
+
+    return categoryDetails;
+}
+
+const getCategoryInfoById = async(userId, categoryId) => {
+    const categoryDetails = await UserWalletCategory.find({
+        _id: categoryId,
+        userId: userId,
+        isDeleted: false
+    }).select(
+        'categoryName categoryType'
+    );
+
+    return categoryDetails;
+}
+
 export {
     isCategoryByNameAvailable,
-    createNewCategory
+    createNewCategory,
+    getAllCategoryInfo,
+    getCategoryInfoById
 };
