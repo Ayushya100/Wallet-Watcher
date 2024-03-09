@@ -4,7 +4,11 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import { errorHandler } from 'lib-service-comms';
+import { errorHandler, verifyToken } from 'lib-service-comms';
+
+// Finance Routes
+import { FINANCE_API } from './constants.js';
+import categoryRoutes from './routes/category-routes/index.js';
 
 const app = express();
 
@@ -31,6 +35,11 @@ app.use(rateLimit({
 app.use(express.static('public'));
 
 app.use(cookieParser());
+
+const tokenKey = process.env.ACCESS_TOKEN_KEY;
+
+// Category Routes
+app.post(`${FINANCE_API}/register-category`, verifyToken(tokenKey), categoryRoutes.registerNewCategory);
 
 // Error Handler middleware
 app.use(errorHandler);
