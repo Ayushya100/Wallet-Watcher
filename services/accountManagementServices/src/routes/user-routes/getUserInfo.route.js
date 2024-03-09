@@ -5,7 +5,7 @@ import userServices from '../../controllers/user-controllers/index.js';
 
 const getUserInfo = async(req, res, next) => {
     try {
-        const userId = req.params.id;
+        const userId = req.params.userId;
 
         // Check if user exists - return data
         const getUserInfo = await userServices.checkUserById(userId);

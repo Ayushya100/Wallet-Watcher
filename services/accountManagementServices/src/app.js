@@ -47,7 +47,7 @@ const tokenKey = process.env.ACCESS_TOKEN_KEY;
 app.post(`${USERS_API}/create-user`, userRoutes.createUser);
 app.put(`${USERS_API}/:userId/verify-user`, userRoutes.verifyUser);
 app.post(`${USERS_API}/user-login`, userRoutes.loginUser);
-app.get(`${USERS_API}/get-user-info/:id`, verifyToken(tokenKey), userRoutes.getUserInfo);
+app.get(`${USERS_API}/get-user-info/:userId`, verifyToken(tokenKey), userRoutes.getUserInfo);
 app.post(`${USERS_API}/refresh-token`, userRoutes.refreshAccessToken);
 app.post(`${USERS_API}/logout-user`, verifyToken(tokenKey), userRoutes.logoutUser);
 app.put(`${USERS_API}/update-profile/:userId`, verifyToken(tokenKey), userRoutes.updateUserDetails);
