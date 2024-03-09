@@ -10,11 +10,13 @@ const UserWalletCategoryModel = (mongoose) => {
             },
             categoryType: {
                 type: String,
-                required: true
+                required: true,
+                trim: true
             },
             categoryName: {
                 type: String,
-                required: true
+                required: true,
+                trim: true
             },
             createdOn: {
                 type: Date,
@@ -47,7 +49,7 @@ const UserWalletCategoryModel = (mongoose) => {
     );
     
     // User Credit Card Model
-    const UserWalletCategory = mongoose.model('CrdExpCategory', userWalletCategorySchema);
+    const UserWalletCategory = mongoose.model('UserWalletCategory', userWalletCategorySchema);
     return UserWalletCategory;
 }
 
