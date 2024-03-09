@@ -53,9 +53,22 @@ const getCategoryInfoById = async(userId, categoryId) => {
     return categoryDetails;
 }
 
+const getCategoryInfoByType = async(userId, categoryType) => {
+    const categoryDetails = await UserWalletCategory.find({
+        userId: userId,
+        categoryType: categoryType,
+        isDeleted: false
+    }).select(
+        'categoryName categoryType'
+    );
+
+    return categoryDetails;
+}
+
 export {
     isCategoryByNameAvailable,
     createNewCategory,
     getAllCategoryInfo,
-    getCategoryInfoById
+    getCategoryInfoById,
+    getCategoryInfoByType
 };
