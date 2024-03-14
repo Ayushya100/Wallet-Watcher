@@ -1,5 +1,6 @@
 'use strict';
 
+import { isUserByIdAvailable } from './user.db.js';
 import { 
     isCategoryByNameAvailable,
     createNewCategory,
@@ -8,7 +9,12 @@ import {
     getCategoryInfoByType,
     isCategoryByIdAvailable,
     updateCategoryName,
-    deleteCategoryById
+    deleteCategoryById,
+    isCardByTokenAvailable,
+    registerNewIncomeRecord,
+    updateCardAmount,
+    getUserFinanceDetails,
+    updateUserFinanceDetails
 } from './finance.db.js';
 
 export default {
@@ -19,5 +25,11 @@ export default {
     getCategoryInfoByType,
     isCategoryByIdAvailable,
     updateCategoryName,
-    deleteCategoryById
+    deleteCategoryById,
+    isUserByIdAvailable,
+    isCardByTokenAvailable,
+    registerNewIncomeRecord,
+    updateCardAmount,
+    getUserFinanceDetails,
+    updateUserFinanceDetails
 };

@@ -9,6 +9,7 @@ import { errorHandler, verifyToken } from 'lib-service-comms';
 // Finance Routes
 import { FINANCE_API } from './constants.js';
 import categoryRoutes from './routes/category-routes/index.js';
+import expAndIncRoutes from './routes/expenseAndIncome-routes/index.js';
 
 const app = express();
 
@@ -45,6 +46,9 @@ app.get(`${FINANCE_API}/get-category-info/:id`, verifyToken(tokenKey), categoryR
 app.get(`${FINANCE_API}/get-category-by-type/:categoryType`, verifyToken(tokenKey), categoryRoutes.getCategoryByType);
 app.put(`${FINANCE_API}/update-category/:id`, verifyToken(tokenKey), categoryRoutes.updateCategoryName);
 app.delete(`${FINANCE_API}/delete-category/:id`, verifyToken(tokenKey), categoryRoutes.deleteCategory);
+
+// Expense & Income Routes
+app.post(`${FINANCE_API}/register-income`, verifyToken(tokenKey), expAndIncRoutes.income.registerIncome);
 
 // Error Handler middleware
 app.use(errorHandler);

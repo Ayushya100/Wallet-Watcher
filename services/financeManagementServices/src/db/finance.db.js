@@ -3,9 +3,12 @@
 import mongoose from 'mongoose';
 
 // Add DB Model
-import { UserWalletCategoryModel } from 'lib-service-comms';
+import { UserWalletCategoryModel, cardInfoModel, IncDetailsModel, UserFinanceModel } from 'lib-service-comms';
 
 const UserWalletCategory = UserWalletCategoryModel(mongoose);
+const CardInfo = cardInfoModel(mongoose);
+const IncomeDetails = IncDetailsModel(mongoose);
+const UserFinance = UserFinanceModel(mongoose);
 
 const isCategoryByNameAvailable = async(payload) => {
     const categoryDetails = await UserWalletCategory.findOne({
@@ -36,7 +39,9 @@ const createNewCategory = async(payload) => {
     const categoryDetails = await UserWalletCategory.create({
         userId: payload.userId,
         categoryType: payload.categoryType.toUpperCase(),
-        categoryName: payload.categoryName
+        categoryName: payload.categoryName,
+        createdBy: payload.userId,
+        modifiedBy: payload.userId
     });
 
     return categoryDetails;
@@ -125,6 +130,83 @@ const deleteCategoryById = async(userId, categoryId) => {
     return updatedCategoryDetails;
 }
 
+const isCardByTokenAvailable = async(userId, cardToken) => {
+    const cardDetails = await CardInfo.findOne({
+        token: cardToken,
+        userId: userId,
+        isDeleted: false
+    }).select(
+        'token cardNumber expirationDate balance isActive'
+    );
+
+    return cardDetails;
+}
+
+const registerNewIncomeRecord = async(payload) => {
+    const incomeDetails = await IncomeDetails.create({
+        userId: payload.userId,
+        incCatId: payload.incomeCategoryId,
+        cardId: payload.cardId,
+        amount: payload.amount,
+        sourceDetails: payload.sourceDetail,
+        dateOfCredit: payload.dateOfCredit,
+        createdBy: payload.userId,
+        modifiedBy: payload.userId
+    });
+
+    return incomeDetails;
+}
+
+const updateCardAmount = async(userId, cardToken, updatedAmount) => {
+    const cardDetails = await CardInfo.findOneAndUpdate(
+        {
+            token: cardToken
+        },
+        {
+            $set: {
+                balance: updatedAmount,
+                modifiedOn: Date.now(),
+                modifiedBy: userId
+            }
+        },
+        {
+            new: true
+        }
+    ).select(
+        'token cardNumber balance'
+    );
+
+    return cardDetails;
+}
+
+const getUserFinanceDetails = async(userId) => {
+    const financeDetails = await UserFinance.findOne({
+        userId: userId
+    }).select(
+        'userId availableFunds lifeTimeIncome lifeTimeInvestment lifeTimeExpenditure'
+    );
+
+    return financeDetails;
+}
+
+const updateUserFinanceDetails = async(userId, updateDetails) => {
+    const financeDetails = await UserFinance.findOneAndUpdate(
+        {
+            userId: userId
+        },
+        {
+            $set: updateDetails
+        },
+        {
+            new: true
+        }
+    ).select(
+        'userId availableFunds lifeTimeIncome lifeTimeInvestment lifeTimeExpenditure'
+    );
+
+    return financeDetails;
+}
+
 export {
     isCategoryByNameAvailable,
     createNewCategory,
@@ -133,5 +215,10 @@ export {
     getCategoryInfoByType,
     isCategoryByIdAvailable,
     updateCategoryName,
-    deleteCategoryById
+    deleteCategoryById,
+    isCardByTokenAvailable,
+    registerNewIncomeRecord,
+    updateCardAmount,
+    getUserFinanceDetails,
+    updateUserFinanceDetails
 };
